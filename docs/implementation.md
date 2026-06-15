@@ -85,11 +85,7 @@ Required by the packages above but tooling, not application surface — listed h
 
 - Install all devDependencies listed in the Dependencies table for Phase 1 (eslint, prettier, husky, vitest, playwright, storybook, etc.)
 - Install `next-intl` (runtime dependency, required for `next.config.ts` configuration)
-
-### Configure `next.config.ts` (next-intl plugin wrapper)
-
-- Wrap Next.js config with `withNextIntl` from `next-intl` plugin
-- This must happen after `next-intl` is installed (moved from Phase 0/3 to Phase 1)
+- **Do NOT wrap `next.config.ts` with `withNextIntl` yet** — the plugin validates the existence of `src/i18n/request.ts` at build time. Applying the wrapper before that file exists causes `next dev` / `next build` to throw `Could not locate request configuration module`. The wrapper is applied in Phase 3 after the i18n files are created.
 
 ### ESLint
 
@@ -199,6 +195,12 @@ Three-layer token architecture (primitive → semantic → component). Primitive
 - `messages/base/da.json`: Danish equivalents
 - `messages/custom/en.json`: Strings translated per project (header, footer, homepage, about, metadata)
 - `messages/custom/da.json`: Danish equivalents
+
+### Configure `next.config.ts` (next-intl plugin wrapper)
+
+- **Warning: `withNextIntl` must be applied AFTER `src/i18n/request.ts` exists.** The plugin resolves the request config path via `resolveI18nPath()`, which throws `Could not locate request configuration module` if the file is missing when `next dev` or `next build` runs.
+- Wrap Next.js config with `withNextIntl` from `next-intl` plugin
+- This was moved from Phase 1 to Phase 3 because the plugin validates the i18n request config at runtime.
 
 ---
 
