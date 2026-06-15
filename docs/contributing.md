@@ -41,7 +41,7 @@ componentName/
 └── ComponentName.stories.tsx (optional)
 ```
 
-**Style variants:** Defined by the design token system ([ADR-0001](./adr/0001-design-token-system.md)) and component styling conventions ([ADR-0003](./adr/0003-component-styling-conventions.md)). Variant classes (e.g. `.btn-primary`, `.btn-sm`) live in a co-located CSS file next to the component's TSX (e.g., `Button.css`) under `@layer components`. Components apply them via `cn()`. See the conventions ADR for the full variant/size/state pattern.
+**Style variants:** Variant classes (e.g. `.btn-primary`, `.btn-sm`) live in a co-located CSS file next to the component's TSX (e.g., `Button.css`) under `@layer components`. Components apply them via `cn()`.
 
 ### Import style
 
@@ -65,7 +65,7 @@ import { Button } from "@/components/ui/button";
 
 ### CSS
 
-All styling uses Tailwind utility classes only. Component variant and size classes are defined in a co-located CSS file next to the component's TSX (e.g., `Button.css`) under `@layer components`, organized as described in [ADR-0003](./adr/0003-component-styling-conventions.md). Never use raw `var()` or hardcoded hex values in component files. See [ADR-0001](./adr/0001-design-token-system.md) (token system) and [ADR-0003](./adr/0003-component-styling-conventions.md) (conventions) for the complete styling architecture.
+All styling uses Tailwind utility classes only. Component variant and size classes are defined in a co-located CSS file next to the component's TSX (e.g., `Button.css`) under `@layer components`. Never use raw `var()` or hardcoded hex values in component files.
 
 ---
 
@@ -114,7 +114,7 @@ All styling uses Tailwind utility classes only. Component variant and size class
 6. Create mocks file if needed (typed export matching the props interface) — create a separate `.mocks.ts` when props have 3+ fields or mock data is shared across stories; otherwise inline mock data in the story file
 7. Create stories file (CSF3 format, at least one "playground" story)
 8. If interactive (Tier 2), create test file (Vitest + Testing Library)
-9. If the component has `@layer components` classes (variants, sizes, states), create a CSS file named `{ComponentName}.css` in the same directory as the component's TSX, with variant/size/state classes under `@layer components` following the naming pattern in [ADR-0003](./adr/0003-component-styling-conventions.md), then add the corresponding `@import` to `src/app/globals.css`
+9. If the component has `@layer components` classes (variants, sizes, states), create a CSS file named `{ComponentName}.css` in the same directory as the component's TSX, with variant/size/state classes under `@layer components`, then add the corresponding `@import` to `src/app/globals.css`
 
 ### How to add a locale
 
@@ -134,7 +134,7 @@ All styling uses Tailwind utility classes only. Component variant and size class
 
 1. Override primitive tokens in `src/app/globals.css` inside the `@theme` block — redeclare `--color-brand-*`, `--font-sans`, `--radius-*`, etc.
 2. The semantic tokens (in `:root` / `.dark`) reference primitives via `var()`, so they automatically pick up the new values.
-3. No template component files need modification. The override seam is described in [ADR-0001](./adr/0001-design-token-system.md) (Section: Project Override Seam).
+3. No template component files need modification.
 
 ### How to add a project-specific component
 

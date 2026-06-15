@@ -164,6 +164,4 @@ Substantial architectural decisions — including accepted candidates, rejected 
 
 | ID     | Title                                                        |
 | ------ | ------------------------------------------------------------ |
-| `0001` | [Design token system](./adr/0001-design-token-system.md)     |
 | `0002` | [Event tracking system](./adr/0002-event-tracking-system.md) |
-| `0003` | [Component styling conventions](./adr/0003-component-styling-conventions.md) |

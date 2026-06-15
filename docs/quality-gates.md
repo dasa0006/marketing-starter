@@ -402,9 +402,7 @@ The following scripts in `package.json` are consumed by the gates above:
 |----------|------------|
 | [Contributing](./contributing.md) | Testing tiers, conventions, how-tos — the human-facing counterpart to the automated gates here |
 | [Implementation Plan](./implementation.md) | Phase 0.5 (Git Init) makes the repo a git repo so the gates have commits to fire on; Phase 1 (Tooling & Config) creates the gate files themselves. The two phases are co-dependent: without 0.5, Phase 1's hooks are inert; without Phase 1, 0.5 has no gates to enforce |
-| [ADR-0001](./adr/0001-design-token-system.md) | Token architecture — design tokens are verified by the build gate (CSS compilation) |
 | [ADR-0002](./adr/0002-event-tracking-system.md) | Event system — verified by unit tests |
-| [ADR-0003](./adr/0003-component-styling-conventions.md) | Component styling — enforced by ESLint rules and code review |
 
 ---
 

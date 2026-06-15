@@ -12,7 +12,7 @@ The starter pins a specific dependency set. Exact pinned versions live in `packa
 | `react`          | `^19`    | 0     | Required by Next.js 16                                            |
 | `react-dom`      | `^19`    | 0     | Required by Next.js 16                                            |
 | `typescript`     | `^5.7`   | 0     | Strict mode (per README "Stack" table)                            |
-| `tailwindcss`    | `^4`     | 2     | v4 with `@theme` directive (ADR-0001)                             |
+| `tailwindcss`    | `^4`     | 2     | v4 with `@theme` directive                                        |
 | `next-intl`      | `^3.26`  | 1     | i18n routing + messages (installed in Phase 1 for next.config.ts) |
 | `next-themes`    | `^0.4`   | 5     | System + user toggle                                              |
 | `lucide-react`   | `^0.460` | 6     | Icon set used by FeatureGrid, Hero, CTA                           |
@@ -167,7 +167,7 @@ Required by the packages above but tooling, not application surface — listed h
 
 ### Design token system
 
-Three-layer token architecture (primitive → semantic → component). Primitive tokens are defined in `src/app/globals.css` via Tailwind v4's `@theme` directive; semantic tokens and surface contexts live in `src/styles/tokens.css`. Detailed in [ADR-0001](./adr/0001-design-token-system.md). Component variant/size/state styling conventions defined in [ADR-0003](./adr/0003-component-styling-conventions.md).
+Three-layer token architecture (primitive → semantic → component). Primitive tokens are defined in `src/app/globals.css` via Tailwind v4's `@theme` directive; semantic tokens and surface contexts live in `src/styles/tokens.css`. Component variant/size/state styling conventions are defined in co-located CSS files under `@layer components`.
 
 ### Fonts
 
@@ -176,7 +176,7 @@ Three-layer token architecture (primitive → semantic → component). Primitive
 
 ### CSS entry point
 
-- `app/layout.tsx` imports `./globals.css` — the sole CSS entry point. `globals.css` holds the `@theme` block (primitive tokens per ADR-0001), imports semantic token files (`tokens.css`, `utilities.css`, `base.css`), and imports every component CSS file. No component imports its own CSS.
+- `app/layout.tsx` imports `./globals.css` — the sole CSS entry point. `globals.css` holds the `@theme` block (primitive tokens), imports semantic token files (`tokens.css`, `utilities.css`, `base.css`), and imports every component CSS file. No component imports its own CSS.
 
 ---
 
@@ -214,7 +214,7 @@ Three-layer token architecture (primitive → semantic → component). Primitive
 - `src/lib/consent/storage.types.ts`: ConsentStorage interface + ConsentStatus type, ConsentCookieName constant
 - `src/lib/consent/storage.ts`: createCookieStorage() + createFakeStorage() factories
 - **Note:** There is no standalone reactive consent module. The storage seam is the single source of truth. Reactive consent state flows through `ConsentProvider` (Phase 5) via React context. The event dispatch layer (see ADR-0002) reads consent synchronously from storage — no separate `lib/consent.ts` with a duplicated state machine.
-- (styling/variant approach defined in ADR-0001 (tokens) and ADR-0003 (conventions))
+- (styling/variant approach defined in co-located CSS files under `@layer components`)
 
 ---
 
