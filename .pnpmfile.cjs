@@ -16,6 +16,21 @@ module.exports = {
           pkg.peerDependencies.storybook = `${current} || ^10.4.4`;
         }
       }
+
+      // Patch legacy ESLint plugins to accept ESLint v10.
+      // These plugins are transitive deps of eslint-config-next and have not
+      // yet published v10-compatible peer dependency ranges.
+      if (pkg.peerDependencies?.eslint) {
+        const current = pkg.peerDependencies.eslint;
+        // Only patch if the range caps at v9 but does not already allow v10
+        if (
+          current.includes("^9") &&
+          !current.includes("^10") &&
+          !current.includes(">=10")
+        ) {
+          pkg.peerDependencies.eslint = `${current} || ^10`;
+        }
+      }
       return pkg;
     },
   },
