@@ -1,22 +1,33 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
-
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
+import storybook from "eslint-plugin-storybook";
+import importPlugin from "eslint-plugin-import";
 
 const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-  ...storybook.configs["flat/recommended"]
+	globalIgnores([
+		".next/**",
+		"out/**",
+		"build/**",
+		"node_modules/**",
+		"next-env.d.ts",
+		"coverage/**",
+	]),
+	...nextVitals,
+	...nextTs,
+	{
+		plugins: {
+			import: importPlugin,
+		},
+		rules: {
+			// Core custom rules
+			"no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+			"no-shadow": "error",
+		},
+	},
+	...storybook.configs["flat/recommended"],
+	eslintConfigPrettier,
 ]);
 
 export default eslintConfig;
