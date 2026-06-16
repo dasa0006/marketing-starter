@@ -92,9 +92,6 @@ Required by the packages above but tooling, not application surface — listed h
 - **Replace scaffolded config entirely** with canonical flat config (`eslint.config.mjs`)
 - Extend `eslint-config-next/core-web-vitals`, `eslint-config-next/typescript`, `eslint-config-prettier`
 - Custom rules: `no-unused-vars` (error, argsIgnorePattern: "^\_"), `no-shadow` (error)
-- `eslint-plugin-import` rules to enforce explicit import paths (no barrel exports):
-  - `import/no-useless-path-segments`: error
-  - `import/no-internal-modules`: restrict imports into `@/components/**` to direct paths (e.g., `@/components/ui/button/Button`, not `@/components/ui/button`)
 - `--max-warnings=0` for the `lint` script (warnings treated as errors in CI)
 - Ignore `.next`, `out`, `node_modules`, `next-env.d.ts`
 
