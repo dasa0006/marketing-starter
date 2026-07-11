@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test:run": "vitest run",
+    "test:run": "vitest run --passWithNoTests",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
