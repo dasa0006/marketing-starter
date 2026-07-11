@@ -46,6 +46,28 @@ const Configuration = {
         "changeset",
       ],
     ],
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "scaffold",
+        "tooling",
+        "styling",
+        "i18n",
+        "lib",
+        "providers",
+        "ui",
+        "hooks",
+        "layout",
+        "blocks",
+        "seo",
+        "pages",
+        "security",
+        "testing",
+        "docs",
+        "project",
+      ],
+    ],
   },
 };
 
