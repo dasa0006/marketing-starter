@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
 		"node_modules/**",
 		"next-env.d.ts",
 		"coverage/**",
+		"storybook-static/**",
 	]),
 	...nextVitals,
 	...nextTs,
