@@ -8,13 +8,13 @@ The goal is not zero defects — it is **shift-left on feedback**: catch the che
 
 ## Layer Overview
 
-| Layer | Feedback time | Runs where | Stops | Cost per event |
-|-------|---------------|------------|-------|----------------|
-| **0 — Editor** | ~100ms | Developer machine | Formatting, lint noise | Zero (passive) |
-| **1 — Pre-commit** | ~5-15s | `pre-commit` hook | Type errors, lint failures, malformed commits | Developer wait |
-| **2 — Pre-push** | ~30-90s | `pre-push` hook | Build breaks, test failures | Developer wait |
-| **3 — CI** | ~2-5m | GitHub Actions on push | Regressions, coverage drops, bundle bloat | Runner time |
-| **4 — PR Merge** | Hours | GitHub UI | Architectural drift, missing context | Human attention |
+| Layer              | Feedback time | Runs where             | Stops                                         | Cost per event  |
+| ------------------ | ------------- | ---------------------- | --------------------------------------------- | --------------- |
+| **0 — Editor**     | ~100ms        | Developer machine      | Formatting, lint noise                        | Zero (passive)  |
+| **1 — Pre-commit** | ~5-15s        | `pre-commit` hook      | Type errors, lint failures, malformed commits | Developer wait  |
+| **2 — Pre-push**   | ~30-90s       | `pre-push` hook        | Build breaks, test failures                   | Developer wait  |
+| **3 — CI**         | ~2-5m         | GitHub Actions on push | Regressions, coverage drops, bundle bloat     | Runner time     |
+| **4 — PR Merge**   | Hours         | GitHub UI              | Architectural drift, missing context          | Human attention |
 
 A defect should be caught at the earliest possible layer. If a type error reaches CI, the pre-commit gate is leaky and needs investigation.
 
@@ -26,8 +26,8 @@ Zero configuration burden on the developer. Tools run passively in the backgroun
 
 ### Gate: Format on save
 
-| Tool | Scope | Trigger |
-|------|-------|---------|
+| Tool     | Scope     | Trigger  |
+| -------- | --------- | -------- |
 | Prettier | All files | `Ctrl+S` |
 
 Configured in `.vscode/settings.json`:
@@ -37,15 +37,15 @@ Configured in `.vscode/settings.json`:
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  }
+    "source.organizeImports": "explicit",
+  },
 }
 ```
 
 ### Gate: Inline diagnostics
 
-| Tool | Scope | Trigger |
-|------|-------|---------|
+| Tool   | Scope         | Trigger             |
+| ------ | ------------- | ------------------- |
 | ESLint | `.ts`, `.tsx` | On file open / edit |
 
 The VS Code ESLint extension reads `eslint.config.mjs` and surfaces errors and warnings in-editor before the developer even saves.
@@ -62,10 +62,10 @@ Runs on `git commit`. Every commit that reaches a remote branch should be clean 
 
 ### Gate: lint-staged
 
-| Tool | Scope | Action |
-|------|-------|--------|
-| `lint-staged` | Staged `.ts`, `.tsx` files | `eslint --fix` + `prettier --write` |
-| `lint-staged` | Staged `.css`, `.json`, `.md` | `prettier --write` |
+| Tool          | Scope                         | Action                              |
+| ------------- | ----------------------------- | ----------------------------------- |
+| `lint-staged` | Staged `.ts`, `.tsx` files    | `eslint --fix` + `prettier --write` |
+| `lint-staged` | Staged `.css`, `.json`, `.md` | `prettier --write`                  |
 
 Only staged files are linted, keeping the hook fast (~1s for typical commits). The `--fix` flag auto-fixes what it can; remaining failures abort the commit.
 
@@ -80,8 +80,8 @@ export default {
 
 ### Gate: TypeScript type check
 
-| Tool | Scope | Action |
-|------|-------|--------|
+| Tool           | Scope        | Action                          |
+| -------------- | ------------ | ------------------------------- |
 | `tsc --noEmit` | Full project | Emit errors for type violations |
 
 **Why full-project, not staged-only:** A type error in an unstaged file can cause a type error in a staged file through shared interfaces. Staged-only type checking gives false confidence.
@@ -90,8 +90,8 @@ This is the slowest pre-commmit step (~5-15s). Acceptable — type errors are th
 
 ### Gate: Commit message validation
 
-| Tool | Scope | Action |
-|------|-------|--------|
+| Tool         | Scope          | Action                                       |
+| ------------ | -------------- | -------------------------------------------- |
 | `commitlint` | Commit message | Validate format against conventional commits |
 
 Prevents non-standard messages from entering the log. Enforced by `commit-msg` hook.
@@ -102,11 +102,28 @@ Prevents non-standard messages from entering the log. Enforced by `commit-msg` h
 export default {
   extends: ["@commitlint/config-conventional"],
   rules: {
-    "scope-enum": [2, "always", [
-      "scaffold", "tooling", "styling", "i18n", "lib",
-      "providers", "ui", "hooks", "layout", "blocks",
-      "seo", "pages", "security", "testing", "docs", "project",
-    ]],
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "scaffold",
+        "tooling",
+        "styling",
+        "i18n",
+        "lib",
+        "providers",
+        "ui",
+        "hooks",
+        "layout",
+        "blocks",
+        "seo",
+        "pages",
+        "security",
+        "testing",
+        "docs",
+        "project",
+      ],
+    ],
     "header-max-length": [2, "always", 72],
     "body-max-line-length": [2, "always", 80],
   },
@@ -133,11 +150,12 @@ Runs on `git push`. Catches defects that span multiple commits or require a full
 
 ### Gate: Production build
 
-| Tool | Scope | Action |
-|------|-------|--------|
+| Tool         | Scope        | Action           |
+| ------------ | ------------ | ---------------- |
 | `next build` | Full project | Production build |
 
 A production build catches:
+
 - Missing exports and incorrect imports
 - Tree-shake boundary violations (`"use client"` placement)
 - Unresolved module paths
@@ -147,8 +165,8 @@ This is the single most valuable pre-push gate. If the build breaks, the push is
 
 ### Gate: Unit tests
 
-| Tool | Scope | Action |
-|------|-------|--------|
+| Tool         | Scope                                    | Action             |
+| ------------ | ---------------------------------------- | ------------------ |
 | `vitest run` | `**/*.test.{ts,tsx}` (excluding stories) | Run all unit tests |
 
 Unit tests are fast enough (~10-30s) that running them pre-push is practical. This catches logic regressions before they reach shared branches.
@@ -181,12 +199,12 @@ jobs:
       7. pnpm build
 ```
 
-| Step | Tool | Fails on | Notes |
-|------|------|----------|-------|
-| Lint | `next lint` | Any ESLint error; warnings treated as errors with `--max-warnings=0` | Full project (not just staged) |
-| Typecheck | `tsc --noEmit` | Any type error | Redundant with pre-commit but enforced for CI-only contributors (e.g., PRs from forks) |
-| Test | `vitest run --coverage` | Any test failure OR coverage below threshold | Coverage threshold configurable in `vitest.config.ts` |
-| Build | `next build` | Any build error or warning | Blocking — non-negotiable |
+| Step      | Tool                    | Fails on                                                             | Notes                                                                                  |
+| --------- | ----------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Lint      | `next lint`             | Any ESLint error; warnings treated as errors with `--max-warnings=0` | Full project (not just staged)                                                         |
+| Typecheck | `tsc --noEmit`          | Any type error                                                       | Redundant with pre-commit but enforced for CI-only contributors (e.g., PRs from forks) |
+| Test      | `vitest run --coverage` | Any test failure OR coverage below threshold                         | Coverage threshold configurable in `vitest.config.ts`                                  |
+| Build     | `next build`            | Any build error or warning                                           | Blocking — non-negotiable                                                              |
 
 ### Pipeline: `.github/workflows/playwright.yml`
 
@@ -217,10 +235,11 @@ jobs:
 
 Optional but recommended. Runs on PRs and comments with a size diff.
 
-| Tool | Step | Action |
-|------|------|--------|
+| Tool                    | Step    | Action                 |
+| ----------------------- | ------- | ---------------------- |
 | `@next/bundle-analyzer` | Analyze | Generate bundle report |
-| `compared` or manual | Diff | Compare against `main` baseline |
+
+The `--webpack` flag is required because `@next/bundle-analyzer` is incompatible with Turbopack (Next.js 16's default build engine). Without the flag, the script would pass silently but generate no report.
 
 Can be its own workflow or a step in the main CI. If bundle size increases by more than 10% or 50KB for a first-load chunk, flag for review.
 
@@ -359,9 +378,9 @@ The following scripts in `package.json` are consumed by the gates above:
     "build": "next build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "analyze": "ANALYZE=true next build",
-    "prepare": "husky"
-  }
+    "analyze": "ANALYZE=true next build --webpack",
+    "prepare": "husky",
+  },
 }
 ```
 
@@ -380,45 +399,45 @@ The following scripts in `package.json` are consumed by the gates above:
 
 ## Config Files Added by This Architecture
 
-| File | Purpose |
-|------|---------|
-| `.husky/pre-commit` | lint-staged |
-| `.husky/pre-push` | `pnpm build && pnpm test:run` |
-| `.husky/commit-msg` | `commitlint --edit` |
-| `commitlint.config.mjs` | Conventional commit rules with scoped valid scopes |
-| `.lintstagedrc.mjs` | Staged-file lint + format |
-| `vitest.config.ts` | (already planned) — adds coverage thresholds |
-| `.storybook/main.ts` | Storybook framework + stories glob + static dirs |
-| `.storybook/preview.tsx` | Global decorators (NextIntlClientProvider, ThemeProvider) + globals.css import |
-| `.github/pull_request_template.md` | PR checklist |
-| `.github/workflows/ci.yml` | Lint → typecheck → test → build |
-| `.github/workflows/playwright.yml` | E2E on main + opt-in PRs |
+| File                               | Purpose                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| `.husky/pre-commit`                | lint-staged                                                                    |
+| `.husky/pre-push`                  | `pnpm build && pnpm test:run`                                                  |
+| `.husky/commit-msg`                | `commitlint --edit`                                                            |
+| `commitlint.config.mjs`            | Conventional commit rules with scoped valid scopes                             |
+| `.lintstagedrc.mjs`                | Staged-file lint + format                                                      |
+| `vitest.config.ts`                 | (already planned) — adds coverage thresholds                                   |
+| `.storybook/main.ts`               | Storybook framework + stories glob + static dirs                               |
+| `.storybook/preview.tsx`           | Global decorators (NextIntlClientProvider, ThemeProvider) + globals.css import |
+| `.github/pull_request_template.md` | PR checklist                                                                   |
+| `.github/workflows/ci.yml`         | Lint → typecheck → test → build                                                |
+| `.github/workflows/playwright.yml` | E2E on main + opt-in PRs                                                       |
 
 ---
 
 ## Relationship to Other Documents
 
-| Document | Connection |
-|----------|------------|
-| [Contributing](./contributing.md) | Testing tiers, conventions, how-tos — the human-facing counterpart to the automated gates here |
-| [Implementation Plan](./implementation.md) | Phase 0.5 (Git Init) makes the repo a git repo so the gates have commits to fire on; Phase 1 (Tooling & Config) creates the gate files themselves. The two phases are co-dependent: without 0.5, Phase 1's hooks are inert; without Phase 1, 0.5 has no gates to enforce |
-| [ADR-0002](./adr/0002-event-tracking-system.md) | Event system — verified by unit tests |
+| Document                                        | Connection                                                                                                                                                                                                                                                               |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Contributing](./contributing.md)               | Testing tiers, conventions, how-tos — the human-facing counterpart to the automated gates here                                                                                                                                                                           |
+| [Implementation Plan](./implementation.md)      | Phase 0.5 (Git Init) makes the repo a git repo so the gates have commits to fire on; Phase 1 (Tooling & Config) creates the gate files themselves. The two phases are co-dependent: without 0.5, Phase 1's hooks are inert; without Phase 1, 0.5 has no gates to enforce |
+| [ADR-0002](./adr/0002-event-tracking-system.md) | Event system — verified by unit tests                                                                                                                                                                                                                                    |
 
 ---
 
 ## Appendix: Cost-Benefit Summary
 
-| Gate | Time cost | Catches | Misses |
-|------|-----------|---------|--------|
-| Editor lint | 0s (passive) | Syntax, formatting | Logic, types, build |
-| tsc (pre-commit) | 5-15s | Type mismatches, missing exports | Runtime logic, CSS |
-| lint-staged | ~1s | Staged-file lint | Untracked files |
-| commitlint | ~0.1s | Malformed commit messages | Content |
-| Build (pre-push) | 30-90s | Build breaks, module resolution | Test failures |
-| Unit tests (pre-push) | 10-30s | Logic regressions | Integration, E2E |
-| CI full suite | 2-5m | Everything above on fresh environment | Story-level interaction |
-| E2E (CI) | 3-5m | Cross-page flows, browser behavior | Per-component behaviour |
-| Storybook test-runner (CI) | 1-3m | Per-component interaction regressions, a11y violations (`@storybook/addon-a11y` runs aXe against every story) | Cross-component flows |
-| Code review | Hours | Architecture, naming, coverage gaps | Automated-checkable items |
+| Gate                       | Time cost    | Catches                                                                                                       | Misses                    |
+| -------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| Editor lint                | 0s (passive) | Syntax, formatting                                                                                            | Logic, types, build       |
+| tsc (pre-commit)           | 5-15s        | Type mismatches, missing exports                                                                              | Runtime logic, CSS        |
+| lint-staged                | ~1s          | Staged-file lint                                                                                              | Untracked files           |
+| commitlint                 | ~0.1s        | Malformed commit messages                                                                                     | Content                   |
+| Build (pre-push)           | 30-90s       | Build breaks, module resolution                                                                               | Test failures             |
+| Unit tests (pre-push)      | 10-30s       | Logic regressions                                                                                             | Integration, E2E          |
+| CI full suite              | 2-5m         | Everything above on fresh environment                                                                         | Story-level interaction   |
+| E2E (CI)                   | 3-5m         | Cross-page flows, browser behavior                                                                            | Per-component behaviour   |
+| Storybook test-runner (CI) | 1-3m         | Per-component interaction regressions, a11y violations (`@storybook/addon-a11y` runs aXe against every story) | Cross-component flows     |
+| Code review                | Hours        | Architecture, naming, coverage gaps                                                                           | Automated-checkable items |
 
 The remaining gap — visual regression testing against pixel baselines (Chromatic/Percy) — is intentionally out of scope for this template. The `@storybook/addon-a11y` panel provides a component-level a11y gate; projects that need pixel-diff baselines can add Chromatic as an additional step that consumes the `build-storybook` artifact.
