@@ -2,6 +2,11 @@ import type { Preview } from "@storybook/nextjs-vite";
 import { NextIntlClientProvider } from "next-intl";
 import React from "react";
 
+// Self-host Geist fonts via fontsource for Storybook parity with next/font/google.
+// These side-effect imports add @font-face rules for the variable font files.
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
+
 import "../src/app/globals.css";
 
 /**
@@ -48,11 +53,23 @@ const preview: Preview = {
 
   decorators: [
     (Story) => (
-      <NextIntlClientProvider locale="en">
-        <StubThemeProvider>
-          <Story />
-        </StubThemeProvider>
-      </NextIntlClientProvider>
+      // The inline style sets --font-geist-sans / --font-geist-mono so that
+      // Tailwind's font-sans / font-mono (defined in globals.css @theme inline)
+      // resolve to the fontsource self-hosted variable fonts.
+      <div
+        style={
+          {
+            "--font-geist-sans": "Geist Variable",
+            "--font-geist-mono": "Geist Mono Variable",
+          } as React.CSSProperties
+        }
+      >
+        <NextIntlClientProvider locale="en">
+          <StubThemeProvider>
+            <Story />
+          </StubThemeProvider>
+        </NextIntlClientProvider>
+      </div>
     ),
   ],
 };
