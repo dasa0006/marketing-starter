@@ -36,6 +36,7 @@ export default defineConfig({
         "src/**/loading.tsx",
         "src/**/error.tsx",
         "src/**/not-found.tsx",
+        "src/lib/styles/**",
       ],
     },
     projects: [

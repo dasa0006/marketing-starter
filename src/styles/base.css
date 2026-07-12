@@ -1,0 +1,31 @@
+/* --- Base Layer ---
+ * Default element styles layered on top of Tailwind's preflight.
+ */
+
+@layer base {
+  html {
+    height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus-visible ring for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid var(--surface-accent);
+    outline-offset: 2px;
+  }
+
+  /* Subtle selection colour */
+  ::selection {
+    background-color: var(--surface-accent);
+    color: var(--text-on-accent);
+  }
+}

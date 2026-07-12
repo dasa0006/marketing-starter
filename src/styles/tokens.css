@@ -1,0 +1,50 @@
+/* --- Semantic Tokens ---
+ * Surface contexts and component-level design tokens.
+ * Part of the three-layer token architecture (primitive → semantic → component).
+ * Primitive tokens live in globals.css @theme; this layer adds semantic meaning
+ * and surface-aware variables that components reference directly.
+ */
+
+@layer base {
+  :root {
+    /* ---- Surface contexts ---- */
+    --surface-white: #ffffff;
+    --surface-subtle: #f1f5f9;
+    --surface-dark: #0f172a;
+    --surface-accent: #3b82f6;
+
+    /* ---- Text on surfaces ---- */
+    --text-on-white: #0f172a;
+    --text-on-subtle: #0f172a;
+    --text-on-dark: #f8fafc;
+    --text-on-accent: #ffffff;
+
+    /* ---- Border tokens ---- */
+    --border-light: #e2e8f0;
+
+    /* ---- Border radius scale ---- */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    /* ---- Section vertical padding ---- */
+    --section-padding-y-sm: 2rem;
+    --section-padding-y: 4rem;
+    --section-padding-y-lg: 6rem;
+    --section-padding-y-xl: 8rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-white: #0a0a0a;
+      --surface-subtle: #1a1a2e;
+      --surface-dark: #020617;
+      --surface-accent: #2563eb;
+
+      --text-on-white: #e2e8f0;
+      --text-on-subtle: #e2e8f0;
+
+      --border-light: #1e293b;
+    }
+  }
+}
