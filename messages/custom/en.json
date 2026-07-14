@@ -1,0 +1,33 @@
+{
+  "SiteHeader": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "privacy": "Privacy",
+      "cookiePolicy": "Cookie Policy"
+    },
+    "cta": "Get Started"
+  },
+  "SiteFooter": {
+    "tagline": "Build better marketing sites.",
+    "copyright": "All rights reserved."
+  },
+  "HomePage": {
+    "title": "Welcome",
+    "description": "This is the home page."
+  },
+  "AboutPage": {
+    "title": "About Us",
+    "description": "Learn more about our company."
+  },
+  "Metadata": {
+    "home": {
+      "title": "Marketing Starter",
+      "description": "A production-grade Next.js marketing site template."
+    },
+    "about": {
+      "title": "About Us | Marketing Starter",
+      "description": "Learn more about our company and what we do."
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "SiteHeader": {
+    "nav": {
+      "home": "Forside",
+      "about": "Om",
+      "privacy": "Privatliv",
+      "cookiePolicy": "Cookiepolitik"
+    },
+    "cta": "Kom i gang"
+  },
+  "SiteFooter": {
+    "tagline": "Byg bedre marketingssider.",
+    "copyright": "Alle rettigheder forbeholdes."
+  },
+  "HomePage": {
+    "title": "Velkommen",
+    "description": "Dette er forsiden."
+  },
+  "AboutPage": {
+    "title": "Om os",
+    "description": "Lær mere om vores virksomhed."
+  },
+  "Metadata": {
+    "home": {
+      "title": "Marketing Starter",
+      "description": "En produktionsklar Next.js marketingside skabelon."
+    },
+    "about": {
+      "title": "Om os | Marketing Starter",
+      "description": "Lær mere om vores virksomhed og hvad vi laver."
+    }
+  }
+}

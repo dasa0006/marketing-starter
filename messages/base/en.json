@@ -1,0 +1,23 @@
+{
+  "CookieBanner": {
+    "title": "We use cookies",
+    "description": "This site uses cookies to improve your experience.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist.",
+    "backToHome": "Back to home"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred.",
+    "retry": "Try again"
+  },
+  "Legal": {
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "termsOfService": "Terms of Service"
+  }
+}

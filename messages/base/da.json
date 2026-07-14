@@ -1,0 +1,23 @@
+{
+  "CookieBanner": {
+    "title": "Vi bruger cookies",
+    "description": "Dette websted bruger cookies til at forbedre din oplevelse.",
+    "accept": "Accepter",
+    "decline": "Afvis"
+  },
+  "NotFound": {
+    "title": "Siden blev ikke fundet",
+    "description": "Siden du leder efter findes ikke.",
+    "backToHome": "Tilbage til forsiden"
+  },
+  "Error": {
+    "title": "Noget gik galt",
+    "description": "Der opstod en uventet fejl.",
+    "retry": "Prøv igen"
+  },
+  "Legal": {
+    "privacyPolicy": "Privatlivspolitik",
+    "cookiePolicy": "Cookiepolitik",
+    "termsOfService": "Servicevilkår"
+  }
+}
