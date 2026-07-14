@@ -6,22 +6,22 @@ import { cn } from "@/lib/utils";
 import type { LinkButtonProps } from "./LinkButton.types";
 
 const sizeClass: Record<string, string> = {
-  sm: "link-btn-sm",
-  md: "link-btn-md",
-  lg: "link-btn-lg",
+  sm: "btn-sm",
+  md: "btn-md",
+  lg: "btn-lg",
 };
 
 const variantClass: Record<string, string> = {
-  primary: "link-btn-primary",
-  secondary: "link-btn-secondary",
-  accent: "link-btn-accent",
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  accent: "btn-accent",
 };
 
 const surfaceClass: Record<string, string> = {
   white: "",
   subtle: "",
-  dark: "link-btn-on-dark",
-  accent: "link-btn-on-accent",
+  dark: "btn-on-dark",
+  accent: "btn-on-accent",
 };
 
 /**
@@ -44,7 +44,7 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
       <Link
         ref={ref}
         className={cn(
-          "link-btn",
+          "btn",
           variantClass[variant],
           sizeClass[size],
           surfaceClass[surface],
