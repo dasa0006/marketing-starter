@@ -14,6 +14,11 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(dirname, "./src"),
+    },
+  },
   test: {
     coverage: {
       provider: "v8",
@@ -37,6 +42,8 @@ export default defineConfig({
         "src/**/error.tsx",
         "src/**/not-found.tsx",
         "src/lib/styles/**",
+        "src/lib/config/**",
+        "src/lib/env.ts",
       ],
     },
     projects: [
