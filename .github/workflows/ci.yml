@@ -34,6 +34,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Install Playwright browsers (for vitest storybook browser tests)
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Test with coverage
         run: pnpm test:run -- --coverage
 
