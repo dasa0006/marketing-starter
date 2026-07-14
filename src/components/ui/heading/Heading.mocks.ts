@@ -1,4 +1,4 @@
-import type { HeadingProps } from "./Heading";
+import type { HeadingProps } from "./Heading.types";
 
 export const mockHeadingLevels: HeadingProps[] = [
   { children: "Heading 1 — Page title", level: 1 },
