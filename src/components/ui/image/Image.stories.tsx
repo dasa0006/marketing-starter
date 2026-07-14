@@ -8,6 +8,7 @@ const meta: Meta<typeof Image> = {
     alt: { control: "text" },
     width: { control: "number" },
     height: { control: "number" },
+    quality: { control: "number", description: "Defaults to 85 via wrapper" },
   },
   tags: ["autodocs"],
 };
