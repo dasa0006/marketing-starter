@@ -1,6 +1,6 @@
 /* --- Button Base ---
  * Shared base styles for Button and LinkButton components.
- * Imported by each component's CSS file, which adds only its unique overrides.
+ * Imported from globals.css; each component CSS file adds only its unique overrides.
  */
 
 @layer components {
