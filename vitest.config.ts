@@ -44,6 +44,11 @@ export default defineConfig({
         "src/lib/styles/**",
         "src/lib/config/**",
         "src/lib/env.ts",
+        "src/lib/events.ts",
+        "src/components/ui/Brand.tsx",
+        "src/components/ui/ManageCookiesButton.tsx",
+        "src/components/ui/locale-switcher/**",
+        "src/components/ui/toggle-mode/**",
       ],
     },
     projects: [

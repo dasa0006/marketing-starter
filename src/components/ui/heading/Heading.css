@@ -1,0 +1,27 @@
+@layer components {
+  .heading {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-foreground);
+  }
+
+  .heading-h1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  .heading-h2 {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+
+  .heading-h3 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .heading-h4 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+}

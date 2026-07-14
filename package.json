@@ -40,6 +40,7 @@
     "@storybook/addon-docs": "10.4.4",
     "@storybook/addon-vitest": "10.4.4",
     "@storybook/nextjs-vite": "10.4.4",
+    "@storybook/react": "10.4.4",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.2",

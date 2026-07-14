@@ -1,0 +1,31 @@
+@layer components {
+  /* ── Sizes ────────────────────────────────────────────────────── */
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .text-base {
+    font-size: 1rem;
+    line-height: 1.625;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .text-lead {
+    font-size: 1.25rem;
+    line-height: 1.75;
+  }
+
+  /* ── Variants ─────────────────────────────────────────────────── */
+  .text-default {
+    color: var(--color-foreground);
+  }
+
+  .text-muted {
+    color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+  }
+}
