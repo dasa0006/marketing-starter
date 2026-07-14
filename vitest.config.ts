@@ -47,7 +47,6 @@ export default defineConfig({
         "src/lib/events.ts",
         "src/components/ui/Brand.tsx",
         "src/components/ui/ManageCookiesButton.tsx",
-        "src/components/ui/toggle-mode/**",
       ],
     },
     projects: [

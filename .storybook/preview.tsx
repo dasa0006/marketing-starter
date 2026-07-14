@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/nextjs-vite";
 import { NextIntlClientProvider } from "next-intl";
+import { ThemeProvider } from "next-themes";
 import React from "react";
 
 // Self-host Geist fonts via fontsource for Storybook parity with next/font/google.
@@ -22,17 +23,17 @@ import "../src/app/globals.css";
  * 4. Run with: vitest run --project storybook
  *
  * If interaction tests require server-side rendering context in the future,
- * this decision can be revisited.
+ * this decision can be reconsidered.
  */
 
 /**
- * ThemeProvider stub — replaced in Phase 5 when the real provider is built.
- * Wraps children without adding any theme context yet.
- * TODO: Replace with actual ThemeProvider from src/app/providers once implemented.
+ * ThemeProvider from next-themes provides the theme context needed by
+ * components that call useTheme() (e.g. ToggleMode).
+ *
+ * attribute="class" makes next-themes toggle the `.dark` class on
+ * document.documentElement, matching the Tailwind dark variant defined
+ * in globals.css (`@variant dark (&:where(.dark, .dark *))`).
  */
-function StubThemeProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
 
 const preview: Preview = {
   parameters: {
@@ -65,9 +66,13 @@ const preview: Preview = {
         }
       >
         <NextIntlClientProvider locale="en">
-          <StubThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+          >
             <Story />
-          </StubThemeProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </div>
     ),
