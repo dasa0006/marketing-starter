@@ -1,0 +1,62 @@
+@layer components {
+  .section {
+    width: 100%;
+  }
+
+  /* ---- Size variants ---- */
+  .section-size-sm {
+    padding-block: var(--section-padding-y-sm);
+  }
+
+  .section-size-md {
+    padding-block: var(--section-padding-y);
+  }
+
+  .section-size-lg {
+    padding-block: var(--section-padding-y-lg);
+  }
+
+  .section-size-xl {
+    padding-block: var(--section-padding-y-xl);
+  }
+
+  /* ---- Surface variants ---- */
+  .section-surface-white {
+    background-color: var(--surface-white);
+    color: var(--text-on-white);
+  }
+
+  .section-surface-subtle {
+    background-color: var(--surface-subtle);
+    color: var(--text-on-subtle);
+  }
+
+  .section-surface-dark {
+    background-color: var(--surface-dark);
+    color: var(--text-on-dark);
+  }
+
+  .section-surface-accent {
+    background-color: var(--surface-accent);
+    color: var(--text-on-accent);
+  }
+
+  /* ---- Container variants ---- */
+  .section-contained {
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-contained {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-contained {
+      padding-inline: 2rem;
+    }
+  }
+}

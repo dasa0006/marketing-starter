@@ -10,6 +10,7 @@
 @import "../components/ui/link-button/LinkButton.css";
 @import "../components/ui/text/Text.css";
 @import "../components/ui/heading/Heading.css";
+@import "../components/layout/section/Section.css";
 
 /* --- Primitive Tokens ---
  * These are injected into Tailwind's theme system so they are available as
