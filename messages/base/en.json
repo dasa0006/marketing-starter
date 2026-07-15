@@ -15,6 +15,10 @@
     "description": "An unexpected error occurred.",
     "retry": "Try again"
   },
+  "SiteHeader": {
+    "navHeading": "Navigation",
+    "toggleMenu": "Toggle menu"
+  },
   "Legal": {
     "privacyPolicy": "Privacy Policy",
     "cookiePolicy": "Cookie Policy",

@@ -13,6 +13,7 @@
 @import "../components/layout/section/Section.css";
 @import "../components/layout/footer/SiteFooter.css";
 @import "../components/layout/cookie-banner/CookieBanner.css";
+@import "../components/layout/header/SiteHeader.css";
 
 /* --- Primitive Tokens ---
  * These are injected into Tailwind's theme system so they are available as

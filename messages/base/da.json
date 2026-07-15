@@ -15,6 +15,10 @@
     "description": "Der opstod en uventet fejl.",
     "retry": "Prøv igen"
   },
+  "SiteHeader": {
+    "navHeading": "Navigation",
+    "toggleMenu": "Skift menu"
+  },
   "Legal": {
     "privacyPolicy": "Privatlivspolitik",
     "cookiePolicy": "Cookiepolitik",

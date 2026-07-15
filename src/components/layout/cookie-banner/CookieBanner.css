@@ -92,7 +92,7 @@
   /* ---- Privacy link ---- */
   .cookie-banner-privacy-link {
     font-size: 0.8125rem;
-    color: var(--surface-accent);
+    color: #1e40af;
     text-decoration: underline;
     text-underline-offset: 2px;
   }

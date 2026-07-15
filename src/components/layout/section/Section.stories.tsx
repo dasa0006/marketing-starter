@@ -57,10 +57,10 @@ export const AllSurfaces: Story = {
       {sectionSurfaces.map((surface) => (
         <Section key={surface} surface={surface}>
           <div className="text-center">
-            <p className="heading heading-h3">
+            <p className="heading heading-h3" style={{ color: "inherit" }}>
               Surface: {surface.charAt(0).toUpperCase() + surface.slice(1)}
             </p>
-            <p className="text-base text-default">
+            <p className="text-base" style={{ color: "inherit" }}>
               Background and text color adapt to the surface context.
             </p>
           </div>
@@ -94,7 +94,7 @@ export const AllCombinations: Story = {
           {sectionSizes.map((size) => (
             <Section key={`${surface}-${size}`} size={size} surface={surface}>
               <div className="text-center">
-                <p className="heading heading-h4">
+                <p className="heading heading-h4" style={{ color: "inherit" }}>
                   {surface.charAt(0).toUpperCase() + surface.slice(1)} / {size}
                 </p>
               </div>

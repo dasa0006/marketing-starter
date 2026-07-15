@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Youtube, Linkedin } from "lucide-react";
+import { ConsentProvider } from "@/components/providers/ConsentProvider";
 import { SiteFooter } from "./SiteFooter";
 import type { SocialLink } from "./SiteFooter.types";
 
@@ -20,6 +21,13 @@ const meta: Meta<typeof SiteFooter> = {
   title: "Layout/SiteFooter",
   component: SiteFooter,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <ConsentProvider>
+        <Story />
+      </ConsentProvider>
+    ),
+  ],
 };
 
 export default meta;
