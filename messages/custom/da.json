@@ -10,7 +10,10 @@
   },
   "SiteFooter": {
     "tagline": "Byg bedre marketingssider.",
-    "copyright": "Alle rettigheder forbeholdes."
+    "copyright": "Alle rettigheder forbeholdes.",
+    "navHeading": "Navigation",
+    "legalHeading": "Juridisk",
+    "socialHeading": "Social"
   },
   "HomePage": {
     "title": "Velkommen",

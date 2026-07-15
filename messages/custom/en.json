@@ -10,7 +10,10 @@
   },
   "SiteFooter": {
     "tagline": "Build better marketing sites.",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "navHeading": "Navigation",
+    "legalHeading": "Legal",
+    "socialHeading": "Social"
   },
   "HomePage": {
     "title": "Welcome",
