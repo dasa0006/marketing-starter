@@ -1,0 +1,103 @@
+@layer components {
+  /* ---- Container ---- */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: var(--surface-white);
+    color: var(--text-on-white);
+    border-top: 1px solid var(--border-light);
+    padding: 1rem;
+    /* Slide-up animation initial state */
+    transform: translateY(100%);
+    opacity: 0;
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
+  }
+
+  .cookie-banner.slide-up {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ---- Inner content ---- */
+  .cookie-banner-content {
+    max-width: 80rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .cookie-banner-content {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  /* ---- Typography ---- */
+  .cookie-banner-title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  .cookie-banner-description {
+    font-size: 0.875rem;
+    color: var(--text-muted, var(--text-on-white));
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+
+  /* ---- Buttons ---- */
+  .cookie-banner-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .cookie-banner-accept,
+  .cookie-banner-decline {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .cookie-banner-accept {
+    background-color: var(--surface-accent);
+    color: var(--text-on-accent);
+  }
+
+  .cookie-banner-accept:hover {
+    opacity: 0.9;
+  }
+
+  .cookie-banner-decline {
+    background-color: transparent;
+    color: var(--text-on-white);
+    border: 1px solid var(--border-light);
+  }
+
+  .cookie-banner-decline:hover {
+    background-color: var(--surface-subtle);
+  }
+
+  /* ---- Privacy link ---- */
+  .cookie-banner-privacy-link {
+    font-size: 0.8125rem;
+    color: var(--surface-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-banner-privacy-link:hover {
+    opacity: 0.7;
+  }
+}
