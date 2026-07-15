@@ -1,0 +1,80 @@
+@layer components {
+  .feature-grid {
+    width: 100%;
+  }
+
+  /* ── Surface-aware text ────────────────────────────────────────── */
+  .feature-grid .heading,
+  .feature-grid .text-default {
+    color: inherit;
+  }
+
+  .feature-grid-header {
+    margin-bottom: 3rem;
+    max-width: 42rem;
+  }
+
+  .feature-grid-header-center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  /* ── Grid ─────────────────────────────────────────────────────── */
+  .feature-grid-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .feature-grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .feature-grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .feature-grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .feature-grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .feature-grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .feature-grid-cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ── Card ─────────────────────────────────────────────────────── */
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+  }
+
+  .feature-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-subtle);
+    color: var(--color-foreground);
+  }
+}

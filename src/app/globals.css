@@ -15,6 +15,12 @@
 @import "../components/layout/cookie-banner/CookieBanner.css";
 @import "../components/layout/header/SiteHeader.css";
 
+/* Block CSS files */
+@import "../components/blocks/hero/Hero.css";
+@import "../components/blocks/feature-grid/FeatureGrid.css";
+@import "../components/blocks/cta/CTA.css";
+@import "../components/blocks/text-block/TextBlock.css";
+
 /* --- Primitive Tokens ---
  * These are injected into Tailwind's theme system so they are available as
  * utility classes (e.g. `bg-background`, `text-foreground`).

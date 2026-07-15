@@ -23,6 +23,22 @@
     "title": "About Us",
     "description": "Learn more about our company."
   },
+  "Hero": {
+    "heading": "Build Better Marketing Sites",
+    "subtitle": "A production-grade Next.js starter with i18n, theming, and block-based composable pages.",
+    "primaryCTA": "Get Started",
+    "secondaryCTA": "Learn More"
+  },
+  "FeatureGrid": {
+    "heading": "Everything You Need",
+    "description": "Production-grade features to build and scale your marketing site."
+  },
+  "CTA": {
+    "heading": "Ready to Get Started?",
+    "description": "Join thousands of teams building better marketing sites with our starter template.",
+    "primaryCTA": "Get Started",
+    "secondaryCTA": "Contact Sales"
+  },
   "Metadata": {
     "home": {
       "title": "Marketing Starter",

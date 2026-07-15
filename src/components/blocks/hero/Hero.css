@@ -1,0 +1,78 @@
+@layer components {
+  .hero {
+    display: flex;
+    width: 100%;
+  }
+
+  /* ── Surface-aware text ────────────────────────────────────────── */
+  .hero .heading,
+  .hero .text-default {
+    color: inherit;
+  }
+
+  /* ── Layout variants ──────────────────────────────────────────── */
+  .hero-layout-center {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-layout-left {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-layout-split {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .hero-layout-split {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  /* ── Content area ─────────────────────────────────────────────── */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 42rem;
+  }
+
+  .hero-layout-split .hero-content {
+    flex: 1 1 50%;
+  }
+
+  .hero-layout-center .hero-content {
+    align-items: center;
+  }
+
+  /* ── Image area ───────────────────────────────────────────────── */
+  .hero-image {
+    flex: 1 1 50%;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+  }
+
+  /* ── CTA group ────────────────────────────────────────────────── */
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hero-layout-center .hero-ctas {
+    justify-content: center;
+  }
+}

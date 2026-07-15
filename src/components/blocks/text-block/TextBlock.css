@@ -1,0 +1,21 @@
+@layer components {
+  .text-block {
+    width: 100%;
+    max-width: 42rem;
+  }
+
+  /* ── Surface-aware text ────────────────────────────────────────── */
+  .text-block .heading {
+    color: inherit;
+  }
+
+  .text-block-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .text-block-content p {
+    color: inherit;
+  }
+}

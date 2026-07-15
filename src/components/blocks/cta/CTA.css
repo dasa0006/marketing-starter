@@ -1,0 +1,41 @@
+@layer components {
+  .cta {
+    width: 100%;
+  }
+
+  /* ── Surface-aware text ────────────────────────────────────────── */
+  .cta .heading,
+  .cta .text-default {
+    color: inherit;
+  }
+
+  .cta-layout-center {
+    text-align: center;
+  }
+
+  .cta-layout-left {
+    text-align: left;
+  }
+
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 36rem;
+  }
+
+  .cta-layout-center .cta-content {
+    margin-inline: auto;
+    align-items: center;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cta-layout-center .cta-actions {
+    justify-content: center;
+  }
+}
