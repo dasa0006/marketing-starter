@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { userEvent, within, expect } from "@storybook/test";
+import { userEvent, within, expect, waitFor } from "@storybook/test";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
 const meta: Meta<typeof LocaleSwitcher> = {
@@ -59,6 +59,8 @@ export const LocaleSelection: Story = {
     // Once the transition finishes (the synchronous mock `router.replace`
     // call resolves), the class is removed.  Checking for its absence
     // proves the full cycle ran.
-    await expect(select).not.toHaveClass("opacity-50");
+    await waitFor(() => {
+      expect(select).not.toHaveClass("opacity-50");
+    });
   },
 };
