@@ -31,6 +31,34 @@
     "about": {
       "title": "Om os | Marketing Starter",
       "description": "Lær mere om vores virksomhed og hvad vi laver."
+    },
+    "privacy": {
+      "title": "Privatlivspolitik | Marketing Starter",
+      "description": "Vores privatlivspolitik beskriver, hvordan vi indsamler, bruger og beskytter dine personoplysninger."
+    },
+    "cookie-policy": {
+      "title": "Cookiepolitik | Marketing Starter",
+      "description": "Lær om, hvordan vi bruger cookies, og dine valg vedrørende dem."
     }
+  },
+  "PrivacyPolicy": {
+    "title": "Privatlivspolitik",
+    "description": "Denne side beskriver, hvordan vi indsamler, bruger og beskytter dine personoplysninger.",
+    "body": "Dette er en pladsholder for privatlivspolitik. Erstat dette indhold med din faktiske privatlivspolitik, før webstedet lanceres."
+  },
+  "CookiePolicy": {
+    "title": "Cookiepolitik",
+    "description": "Lær om, hvordan vi bruger cookies og lignende sporingsteknologier.",
+    "body": "Dette er en pladsholder for cookiepolitik. Erstat dette indhold med din faktiske cookiepolitik, før webstedet lanceres."
+  },
+  "NotFound": {
+    "title": "Siden blev ikke fundet",
+    "description": "Siden du leder efter findes ikke eller er blevet flyttet.",
+    "backToHome": "Tilbage til forsiden"
+  },
+  "Error": {
+    "title": "Noget gik galt",
+    "description": "Der opstod en uventet fejl under behandlingen af din anmodning.",
+    "retry": "Prøv igen"
   }
 }

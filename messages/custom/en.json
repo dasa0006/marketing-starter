@@ -47,6 +47,34 @@
     "about": {
       "title": "About Us | Marketing Starter",
       "description": "Learn more about our company and what we do."
+    },
+    "privacy": {
+      "title": "Privacy Policy | Marketing Starter",
+      "description": "Our privacy policy outlines how we collect, use, and protect your personal data."
+    },
+    "cookie-policy": {
+      "title": "Cookie Policy | Marketing Starter",
+      "description": "Learn about how we use cookies and your choices regarding them."
     }
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "description": "This page describes how we collect, use, and protect your personal information.",
+    "body": "This is a placeholder privacy policy. Please replace this content with your actual privacy policy before launching the site."
+  },
+  "CookiePolicy": {
+    "title": "Cookie Policy",
+    "description": "Learn about how we use cookies and similar tracking technologies.",
+    "body": "This is a placeholder cookie policy. Please replace this content with your actual cookie policy before launching the site."
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
+  },
+  "Error": {
+    "title": "Something Went Wrong",
+    "description": "An unexpected error occurred while processing your request.",
+    "retry": "Try Again"
   }
 }
