@@ -21,7 +21,51 @@
   },
   "AboutPage": {
     "title": "Om os",
-    "description": "Lær mere om vores virksomhed."
+    "description": "Lær mere om vores virksomhed.",
+    "section1Heading": "Vores historie",
+    "section1Body": "Grundlagt med en passion for gode weboplevelser, satte vi os for at bygge det bedst mulige fundament for marketingssider.\n\nVores team kombinerer dyb ekspertise inden for designsystemer, præstationsoptimering og developer experience for at skabe en starter, som teams elsker at bruge.",
+    "section2Heading": "Vores mission",
+    "section2Body": "Vi giver marketingteams mulighed for at bygge smukke, højtydende hjemmesider uden at gå på kompromis med developer experience eller tilgængelighed.\n\nVores platform kombinerer de bedste moderne webteknologier med en intuitiv komponentarkitektur, som alle på teamet kan bidrage til."
+  },
+  "Hero": {
+    "heading": "Byg Bedre Marketingssider",
+    "subtitle": "En produktionsklar Next.js starter med i18n, temaer og blokbaserede komponerbare sider.",
+    "primaryCTA": "Kom i gang",
+    "secondaryCTA": "Lær mere"
+  },
+  "FeatureGrid": {
+    "heading": "Alt Hvad Du Behøver",
+    "description": "Produktionsklare funktioner til at bygge og skalere din marketingside.",
+    "lightning": {
+      "heading": "Lynhurtig",
+      "description": "Bygget på Next.js for optimal ydeevne med automatisk kodeopdeling og edge caching."
+    },
+    "secure": {
+      "heading": "Sikker som standard",
+      "description": "Sikkerhed på virksomhedsniveau med CSP-headers, korrekt CORS-konfiguration og inputvalidering."
+    },
+    "globe": {
+      "heading": "Klar til internationalisering",
+      "description": "Fuld i18n-understøttelse med next-intl til routing, oversættelser og sprogregistrering."
+    },
+    "analytics": {
+      "heading": "Klar til analyse",
+      "description": "Indbygget event tracking-infrastruktur. Tilslut din analyseudbyder uden besvær."
+    },
+    "team": {
+      "heading": "Teamvenlig",
+      "description": "Konsistente kodemønstre, samlokaliserede filer og stærke konventioner gør samarbejde let."
+    },
+    "notifications": {
+      "heading": "Notifikationssystem",
+      "description": "Toast-notifikationer og bannerbeskeder med handlingstilbagekald og automatisk skjulning."
+    }
+  },
+  "CTA": {
+    "heading": "Klar til at komme i gang?",
+    "description": "Slut dig til tusindvis af teams, der bygger bedre marketingssider med vores startskabelon.",
+    "primaryCTA": "Kom i gang",
+    "secondaryCTA": "Kontakt salg"
   },
   "Metadata": {
     "home": {
