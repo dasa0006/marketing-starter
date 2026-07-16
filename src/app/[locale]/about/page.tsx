@@ -1,5 +1,6 @@
-import Index from "@/components/pages/Index";
+import About from "@/components/pages/About";
 import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
+import { buildBreadcrumbSchema } from "@/lib/seo/schemas";
 import { getPageMetadata } from "@/lib/seo/metadata";
 import { routing, generateStaticParamsForLocales } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
@@ -12,11 +13,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Metadata.home" });
+  const t = await getTranslations({ locale, namespace: "Metadata.about" });
 
   return getPageMetadata({
     locale,
-    path: "/",
+    path: "/about",
     title: t("title"),
     description: t("description"),
     locales: routing.locales,
@@ -24,11 +25,23 @@ export async function generateMetadata({
   });
 }
 
-export default function HomePage() {
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "SiteHeader.nav" });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: t("home"), item: "/" },
+    { name: t("about"), item: "/about" },
+  ]);
+
   return (
     <>
-      <Index />
-      <JsonLdScripts />
+      <About />
+      <JsonLdScripts schemas={[breadcrumbSchema]} />
     </>
   );
 }

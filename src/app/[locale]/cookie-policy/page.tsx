@@ -1,5 +1,4 @@
-import Index from "@/components/pages/Index";
-import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
+import CookiePolicy from "@/components/pages/CookiePolicy";
 import { getPageMetadata } from "@/lib/seo/metadata";
 import { routing, generateStaticParamsForLocales } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
@@ -12,11 +11,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Metadata.home" });
+  const t = await getTranslations({
+    locale,
+    namespace: "Metadata.cookie-policy",
+  });
 
   return getPageMetadata({
     locale,
-    path: "/",
+    path: "/cookie-policy",
     title: t("title"),
     description: t("description"),
     locales: routing.locales,
@@ -24,11 +26,6 @@ export async function generateMetadata({
   });
 }
 
-export default function HomePage() {
-  return (
-    <>
-      <Index />
-      <JsonLdScripts />
-    </>
-  );
+export default function CookiePolicyPage() {
+  return <CookiePolicy />;
 }
