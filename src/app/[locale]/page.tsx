@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { generateStaticParamsForLocales } from "@/i18n/routing";
+
+export { generateStaticParamsForLocales as generateStaticParams };
 
 export default function Home() {
   return (
