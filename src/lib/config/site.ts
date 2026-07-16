@@ -19,9 +19,14 @@ export const SITE_CONFIG = {
 } as const;
 
 // ── Validation guard ──────────────────────────────────────────────
-// Throw in production if defaults haven't been customised — the
-// template values are placeholders and should be changed per project.
-if (process.env.NODE_ENV === "production") {
+// Throw at runtime (next start) if defaults haven't been customised —
+// the template values are placeholders and should be changed per project.
+// Skipped during next build so that production builds succeed even before
+// the override seam is customised (CI/QA catches this, not the compiler).
+if (
+  process.env.NODE_ENV === "production" &&
+  process.env.NEXT_PHASE !== "phase-production-build"
+) {
   if (SITE_CONFIG.name === DEFAULT_NAME) {
     throw new Error(
       "SITE_CONFIG.name is still the default value. " +
