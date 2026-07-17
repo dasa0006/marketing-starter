@@ -14,10 +14,11 @@ test.describe("Locale switching", () => {
       })
     ).toBeVisible();
 
-    // Switch locale to Danish using the select element
-    const localeSelect = page.getByRole("combobox", {
-      name: "Select language",
-    });
+    // Switch locale to Danish using the select element.
+    // Scope to the banner (header) to avoid the duplicate in the mobile drawer.
+    const localeSelect = page
+      .getByRole("banner")
+      .getByRole("combobox", { name: "Select language" });
     await localeSelect.selectOption("da");
 
     // Wait for navigation to complete — URL should now contain /da
@@ -45,14 +46,17 @@ test.describe("Locale switching", () => {
       })
     ).toBeVisible();
 
-    // Switch locale to English
-    const localeSelect = page.getByRole("combobox", {
-      name: "Select language",
-    });
+    // Switch locale to English.
+    // Scope to the banner (header) to avoid the duplicate in the mobile drawer.
+    const localeSelect = page
+      .getByRole("banner")
+      .getByRole("combobox", { name: "Select language" });
     await localeSelect.selectOption("en");
 
-    // Wait for navigation to complete — URL should now contain /en
-    await expect(page).toHaveURL(/\/en(?:\/|$)/);
+    // Wait for navigation to complete — URL should now be / or /en.
+    // With "as-needed" prefix the default locale ("en") has no prefix,
+    // so switching from Danish to English produces just "/".
+    await expect(page).toHaveURL(/\/(?:en)?\/?$/);
 
     // Verify page now shows English content
     await expect(

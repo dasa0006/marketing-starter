@@ -10,7 +10,9 @@ test.describe("404 Not Found", () => {
       page.getByRole("heading", { name: "Page Not Found" })
     ).toBeVisible();
     await expect(
-      page.getByText("The page you are looking for doesn't exist.")
+      page.getByText(
+        "The page you are looking for doesn't exist or has been moved."
+      )
     ).toBeVisible();
   });
 

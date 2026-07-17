@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import {
@@ -40,24 +41,40 @@ export function ConsentProvider({
   /** Storage seam — defaults to cookie storage. Inject `createFakeStorage()` in tests. */
   storage?: ConsentStorage;
 }) {
-  const [status, setStatus] = useState<ConsentStatus>(() =>
-    storage.getConsent()
+  // useSyncExternalStore is the correct React 19 pattern for syncing
+  // state from an external source (document.cookie).  The third argument
+  // (getServerSnapshot) returns "undecided" during SSR where document
+  // isn't available.  After hydration the client-side getSnapshot reads
+  // the actual cookie — if it differs, React re-renders once with the
+  // correct value, without triggering a hydration warning.
+  //
+  // Because cookies have no external change-event mechanism, we pair
+  // subscribe with a tick counter: accept/decline/reset write to the
+  // cookie and bump the tick, which re-renders the component.  During
+  // that re-render getSnapshot re-reads the cookie, and
+  // useSyncExternalStore detects the value change.
+  const [, bump] = useState(0);
+
+  const status: ConsentStatus = useSyncExternalStore(
+    () => () => {},
+    () => storage.getConsent(),
+    () => "undecided"
   );
 
   const accept = useCallback(() => {
     storage.setConsent("accepted");
-    setStatus("accepted");
-  }, [storage]);
+    bump((n) => n + 1);
+  }, [storage, bump]);
 
   const decline = useCallback(() => {
     storage.setConsent("declined");
-    setStatus("declined");
-  }, [storage]);
+    bump((n) => n + 1);
+  }, [storage, bump]);
 
   const reset = useCallback(() => {
     storage.clearConsent();
-    setStatus("undecided");
-  }, [storage]);
+    bump((n) => n + 1);
+  }, [storage, bump]);
 
   return (
     <ConsentContext.Provider value={{ status, accept, decline, reset }}>
