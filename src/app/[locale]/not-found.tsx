@@ -11,9 +11,10 @@ import { Link } from "@/i18n/navigation";
 export default async function LocaleNotFound({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params?: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const resolved = await params?.catch(() => undefined);
+  const locale = resolved?.locale ?? "en";
   const t = await getTranslations({ locale, namespace: "NotFound" });
 
   return (

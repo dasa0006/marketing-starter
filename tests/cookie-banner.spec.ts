@@ -52,23 +52,18 @@ test.describe("Cookie banner", () => {
     expect(consentCookie?.value).toBe("declined");
   });
 
-  test("does not appear after accepting on a previous visit", async ({
+  test("does not reappear after accepting and reloading the page", async ({
     page,
-    context,
   }) => {
-    // Pre-set the consent cookie to accepted
-    await context.addCookies([
-      {
-        name: "consent-status",
-        value: "accepted",
-        domain: "localhost",
-        path: "/",
-      },
-    ]);
-
+    // First visit: accept cookies
     await page.goto("/en");
+    const banner = page.getByRole("dialog", { name: "We use cookies" });
+    await expect(banner).toBeVisible();
+    await page.getByRole("button", { name: "Accept" }).click();
+    await expect(banner).not.toBeVisible();
 
-    // Banner should not render
+    // Reload: banner should stay hidden (cookie persists across requests)
+    await page.reload();
     await expect(
       page.getByRole("dialog", { name: "We use cookies" })
     ).not.toBeVisible();
