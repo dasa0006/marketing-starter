@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ConsentProvider } from "@/components/providers/ConsentProvider";
+import { createFakeStorage } from "@/lib/consent/storage";
 import { CookieBanner } from "./CookieBanner";
 
 const meta: Meta<typeof CookieBanner> = {
@@ -8,7 +9,7 @@ const meta: Meta<typeof CookieBanner> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <ConsentProvider>
+      <ConsentProvider storage={createFakeStorage("undecided")}>
         <Story />
       </ConsentProvider>
     ),
