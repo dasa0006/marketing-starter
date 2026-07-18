@@ -34,3 +34,11 @@
 }
 
 @variant dark (&:where(.dark, .dark *));
+
+/* Dark mode overrides for @theme tokens — respond to next-themes .dark
+   class on <html> rather than @media (prefers-color-scheme), keeping the
+   VDOM deterministic during SSR and making the ToggleMode button work. */
+:root.dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+}

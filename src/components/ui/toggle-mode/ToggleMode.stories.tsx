@@ -31,31 +31,30 @@ export const Dark: Story = {
  * `attribute="class"` and `defaultTheme="light"`, so the initial state
  * has no `.dark` class on `<html>`.
  *
+ * Icon visibility is controlled via CSS `dark:` variants (both SVGs are
+ * always in the DOM), so the button has a static `aria-label="Toggle theme"`.
+ *
  * What is verified:
- * - Initial state: button label reads "Switch to dark mode" and the
- *   `<html>` element does NOT have the `.dark` class.
- * - After first click: the `.dark` class IS present and the aria-label
- *   updates to "Switch to light mode".
- * - After second click: the `.dark` class is removed (back to light)
- *   and the aria-label reverts.
+ * - Initial state: button exists and the `<html>` element does NOT have
+ *   the `.dark` class (light mode).
+ * - After first click: the `.dark` class IS present (dark mode).
+ * - After second click: the `.dark` class is removed (back to light).
  */
 export const ToggleTheme: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
     // ── initial state: light mode ──────────────────────────────────
-    const button = canvas.getByRole("button", { name: "Switch to dark mode" });
+    const button = canvas.getByRole("button", { name: "Toggle theme" });
     await expect(button).toBeInTheDocument();
     await expect(document.documentElement).not.toHaveClass("dark");
 
     // ── click to toggle to dark ────────────────────────────────────
     await userEvent.click(button);
     await expect(document.documentElement).toHaveClass("dark");
-    await expect(button).toHaveAttribute("aria-label", "Switch to light mode");
 
     // ── click to toggle back to light ──────────────────────────────
     await userEvent.click(button);
     await expect(document.documentElement).not.toHaveClass("dark");
-    await expect(button).toHaveAttribute("aria-label", "Switch to dark mode");
   },
 };

@@ -34,17 +34,15 @@
     --section-padding-y-xl: 8rem;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --surface-white: #0a0a0a;
-      --surface-subtle: #1a1a2e;
-      --surface-dark: #020617;
-      --surface-accent: #2563eb;
+  :root.dark {
+    --surface-white: #0a0a0a;
+    --surface-subtle: #1a1a2e;
+    --surface-dark: #020617;
+    --surface-accent: #2563eb;
 
-      --text-on-white: #e2e8f0;
-      --text-on-subtle: #e2e8f0;
+    --text-on-white: #e2e8f0;
+    --text-on-subtle: #e2e8f0;
 
-      --border-light: #1e293b;
-    }
+    --border-light: #1e293b;
   }
 }

@@ -12,17 +12,19 @@ interface ToggleModeProps {
  * Dark / light mode toggle using `next-themes`.
  *
  * Renders a Sun icon in dark mode (to switch to light) and a Moon icon
- * in light mode (to switch to dark). Falls back to Sun when theme is
- * not yet resolved (SSR safety).
+ * in light mode (to switch to dark). Uses CSS `dark:` variants to toggle
+ * icon visibility — both SVGs are always in the DOM, avoiding hydration
+ * mismatches between SSR (theme-unaware) and client (theme-aware).
+ *
+ * The injected next-themes `<script>` sets the `dark` class on `<html>`
+ * before React hydrates, so the correct icon is visible from the start.
  */
 export function ToggleMode({ className }: ToggleModeProps) {
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   const toggle = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
-
-  const isDark = theme === "dark";
 
   return (
     <button
@@ -32,13 +34,10 @@ export function ToggleMode({ className }: ToggleModeProps) {
         className
       )}
       onClick={toggle}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label="Toggle theme"
     >
-      {isDark ? (
-        <Sun size={20} aria-hidden="true" />
-      ) : (
-        <Moon size={20} aria-hidden="true" />
-      )}
+      <Sun size={20} aria-hidden="true" className="hidden dark:block" />
+      <Moon size={20} aria-hidden="true" className="dark:hidden" />
     </button>
   );
 }
