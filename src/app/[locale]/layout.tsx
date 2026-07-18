@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { ThemeProvider } from "next-themes";
 import { getPageMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/lib/config/site";
 import { routing, generateStaticParamsForLocales } from "@/i18n/routing";
@@ -48,10 +47,13 @@ export async function generateMetadata({
 // ── Layout ────────────────────────────────────────────────────────
 
 /**
- * Locale-scoped layout — the full HTML shell for every page.
+ * Locale-scoped layout — page chrome and locale-aware providers.
  *
- * Renders the provider chain (ThemeProvider → NextIntlClientProvider →
- * ConsentProvider), SiteHeader, <main>, SiteFooter, and CookieBanner.
+ * Renders the provider chain (NextIntlClientProvider → ConsentProvider),
+ * SiteHeader, <main>, SiteFooter, and CookieBanner.
+ *
+ * Note: `ThemeProvider` lives in the root layout so it persists
+ * across client-side navigations including locale switches.
  */
 export default async function LocaleLayout({
   children,
@@ -61,19 +63,17 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <NextIntlClientProvider
-        locale={locale}
-        messages={messages}
-        timeZone={SITE_CONFIG.timezone}
-      >
-        <ConsentProvider>
-          <SiteHeader />
-          <main>{children}</main>
-          <SiteFooter />
-          <CookieBanner />
-        </ConsentProvider>
-      </NextIntlClientProvider>
-    </ThemeProvider>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages}
+      timeZone={SITE_CONFIG.timezone}
+    >
+      <ConsentProvider>
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
+        <CookieBanner />
+      </ConsentProvider>
+    </NextIntlClientProvider>
   );
 }

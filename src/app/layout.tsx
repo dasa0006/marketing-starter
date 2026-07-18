@@ -1,11 +1,18 @@
 import { fontVariables } from "@/lib/styles/fonts";
+import { ThemeProvider } from "next-themes";
 
 /**
- * Root layout — bare pass-through.
+ * Root layout — HTML shell, font variables, and persistent providers.
  *
- * Only provides `<html>` and `<body>` with font variables.
- * All providers, shell components (SiteHeader/SiteFooter), CSS imports,
- * and metadata belong in `app/[locale]/layout.tsx`.
+ * `ThemeProvider` lives here (not in `[locale]/layout.tsx`) so it mounts
+ * once and never remounts on client-side navigations, including locale
+ * switches. This prevents React 19 from warning about the inline
+ * `<script>` element next-themes renders for FOUC prevention — the
+ * script only exists during SSR hydration; client-side remounts would
+ * trigger a false-positive console error in Next.js 16.2+ (the script
+ * is harmless and idempotent on re-creation).
+ *
+ * All other providers and shell components belong in the locale layout.
  */
 export default function RootLayout({
   children,
@@ -14,7 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={fontVariables}>{children}</body>
+      <body className={fontVariables}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
