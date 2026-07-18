@@ -1,5 +1,5 @@
 import type { Meta, StoryObj, Decorator } from "@storybook/nextjs-vite";
-import { userEvent, within, expect } from "@storybook/test";
+import { userEvent, within, expect } from "storybook/test";
 import { ToggleMode } from "./ToggleMode";
 
 const darkClassDecorator: Decorator = (StoryComponent) => (

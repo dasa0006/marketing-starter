@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { userEvent, within, expect, waitFor } from "@storybook/test";
+import { userEvent, within, expect, waitFor } from "storybook/test";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
 const meta: Meta<typeof LocaleSwitcher> = {

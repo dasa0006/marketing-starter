@@ -19,7 +19,7 @@ export const mockHeroSplit: HeroProps = {
   ...mockHeroProps,
   layout: "split",
   image: {
-    src: "/file.svg",
+    src: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23eee' width='400' height='300'/%3E%3C/svg%3E",
     alt: "Hero illustration",
   },
 };
@@ -43,7 +43,10 @@ export const mockHeroVariants: HeroProps[] = [
   {
     ...mockHeroProps,
     layout: "split",
-    image: { src: "/file.svg", alt: "Hero illustration" },
+    image: {
+      src: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23eee' width='400' height='300'/%3E%3C/svg%3E",
+      alt: "Hero illustration",
+    },
   },
 ];
 

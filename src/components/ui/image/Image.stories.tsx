@@ -21,8 +21,8 @@ type Story = StoryObj<typeof Image>;
  */
 export const WithDimensions: Story = {
   args: {
-    src: "/next.svg",
-    alt: "Next.js logo",
+    src: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='38' viewBox='0 0 180 38'%3E%3Crect fill='%23eee' width='180' height='38'/%3E%3C/svg%3E",
+    alt: "Placeholder image",
     width: 180,
     height: 38,
   },
@@ -40,8 +40,8 @@ const fillContainerDecorator: Decorator = (StoryComponent) => (
  */
 export const FillContainer: Story = {
   args: {
-    src: "/next.svg",
-    alt: "Next.js logo filling container",
+    src: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect fill='%23eee' width='400' height='200'/%3E%3C/svg%3E",
+    alt: "Placeholder image filling container",
     fill: true,
     className: "object-contain",
   },
