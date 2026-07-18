@@ -1,7 +1,20 @@
+import { NextIntlClientProvider } from "next-intl";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ConsentProvider } from "@/components/providers/ConsentProvider";
 import { createFakeStorage } from "@/lib/consent/storage";
 import { CookieBanner } from "./CookieBanner";
+
+const messages = {
+  CookieBanner: {
+    title: "We use cookies",
+    description: "This site uses cookies to improve your experience.",
+    accept: "Accept",
+    decline: "Decline",
+  },
+  Legal: {
+    privacyPolicy: "Privacy Policy",
+  },
+};
 
 const meta: Meta<typeof CookieBanner> = {
   title: "Layout/CookieBanner",
@@ -9,9 +22,11 @@ const meta: Meta<typeof CookieBanner> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <ConsentProvider storage={createFakeStorage("undecided")}>
-        <Story />
-      </ConsentProvider>
+      <NextIntlClientProvider locale="en" messages={messages}>
+        <ConsentProvider storage={createFakeStorage("undecided")}>
+          <Story />
+        </ConsentProvider>
+      </NextIntlClientProvider>
     ),
   ],
 };
