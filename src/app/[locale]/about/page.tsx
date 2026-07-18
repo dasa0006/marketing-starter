@@ -3,7 +3,7 @@ import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
 import { buildBreadcrumbSchema } from "@/lib/seo/schemas";
 import { getPageMetadata } from "@/lib/seo/metadata";
 import { routing, generateStaticParamsForLocales } from "@/i18n/routing";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export { generateStaticParamsForLocales as generateStaticParams };
 
@@ -31,6 +31,7 @@ export default async function AboutPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "SiteHeader.nav" });
 
   const breadcrumbSchema = buildBreadcrumbSchema([
