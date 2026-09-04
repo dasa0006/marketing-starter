@@ -1,27 +1,12 @@
 {
-  "CookieBanner": {
-    "title": "Vi bruger cookies",
-    "description": "Dette websted bruger cookies til at forbedre din oplevelse.",
-    "accept": "Accepter",
-    "decline": "Afvis"
-  },
   "NotFound": {
     "title": "Siden blev ikke fundet",
-    "description": "Siden du leder efter findes ikke.",
+    "description": "Siden du leder efter findes ikke eller er blevet flyttet.",
     "backToHome": "Tilbage til forsiden"
   },
   "Error": {
     "title": "Noget gik galt",
-    "description": "Der opstod en uventet fejl.",
+    "description": "Der opstod en uventet fejl under behandlingen af din anmodning.",
     "retry": "Prøv igen"
-  },
-  "SiteHeader": {
-    "navHeading": "Navigation",
-    "toggleMenu": "Skift menu"
-  },
-  "Legal": {
-    "privacyPolicy": "Privatlivspolitik",
-    "cookiePolicy": "Cookiepolitik",
-    "termsOfService": "Servicevilkår"
   }
 }

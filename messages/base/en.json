@@ -1,27 +1,12 @@
 {
-  "CookieBanner": {
-    "title": "We use cookies",
-    "description": "This site uses cookies to improve your experience.",
-    "accept": "Accept",
-    "decline": "Decline"
-  },
   "NotFound": {
-    "title": "Page not found",
-    "description": "The page you are looking for doesn't exist.",
-    "backToHome": "Back to home"
+    "title": "Page Not Found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
   },
   "Error": {
-    "title": "Something went wrong",
-    "description": "An unexpected error occurred.",
-    "retry": "Try again"
-  },
-  "SiteHeader": {
-    "navHeading": "Navigation",
-    "toggleMenu": "Toggle menu"
-  },
-  "Legal": {
-    "privacyPolicy": "Privacy Policy",
-    "cookiePolicy": "Cookie Policy",
-    "termsOfService": "Terms of Service"
+    "title": "Something Went Wrong",
+    "description": "An unexpected error occurred while processing your request.",
+    "retry": "Try Again"
   }
 }

@@ -280,7 +280,7 @@ Enforced by CI script or server-side hook:
 
 ```
 pattern: ^(feat|fix|chore|docs|refactor)/<issue-number>-<kebab-description>
-example: feat/42-add-hero-block
+example: feat/42-add-security-header
 ```
 
 Not a hard block (can be overridden for direct pushes to `main`), but CI emits a warning on non-conforming branch names.
@@ -416,16 +416,16 @@ The following scripts in `package.json` are consumed by the gates above:
 
 ## Appendix: Cost-Benefit Summary
 
-| Gate                  | Time cost    | Catches                               | Misses                    |
-| --------------------- | ------------ | ------------------------------------- | ------------------------- |
-| Editor lint           | 0s (passive) | Syntax, formatting                    | Logic, types, build       |
-| tsc (pre-commit)      | 5-15s        | Type mismatches, missing exports      | Runtime logic, CSS        |
-| lint-staged           | ~1s          | Staged-file lint                      | Untracked files           |
-| commitlint            | ~0.1s        | Malformed commit messages             | Content                   |
-| Build (pre-push)      | 30-90s       | Build breaks, module resolution       | Test failures             |
-| Unit tests (pre-push) | 10-30s       | Logic regressions                     | Integration, E2E          |
-| CI full suite         | 2-5m         | Everything above on fresh environment | Story-level interaction   |
-| E2E (CI)              | 3-5m         | Cross-page flows, browser behavior    | Per-component behaviour   |
-| Code review           | Hours        | Architecture, naming, coverage gaps   | Automated-checkable items |
+| Gate                  | Time cost    | Catches                               | Misses                                  |
+| --------------------- | ------------ | ------------------------------------- | --------------------------------------- |
+| Editor lint           | 0s (passive) | Syntax, formatting                    | Logic, types, build                     |
+| tsc (pre-commit)      | 5-15s        | Type mismatches, missing exports      | Runtime logic, CSS                      |
+| lint-staged           | ~1s          | Staged-file lint                      | Untracked files                         |
+| commitlint            | ~0.1s        | Malformed commit messages             | Content                                 |
+| Build (pre-push)      | 30-90s       | Build breaks, module resolution       | Test failures                           |
+| Unit tests (pre-push) | 10-30s       | Logic regressions                     | Integration, E2E                        |
+| CI full suite         | 2-5m         | Everything above on fresh environment | E2E-only flows                          |
+| E2E (CI)              | 3-5m         | Cross-page flows, browser behavior    | Unit-testable logic (covered by Vitest) |
+| Code review           | Hours        | Architecture, naming, coverage gaps   | Automated-checkable items               |
 
 Visual regression testing against pixel baselines (Chromatic/Percy) is intentionally out of scope for this template. Projects that need pixel-diff baselines can add a visual-testing step on top of their own component library.

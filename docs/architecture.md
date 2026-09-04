@@ -134,14 +134,14 @@ This is a single canonical home for one concern (HTTP security headers). The Nex
 
 - Server-side loader in `src/i18n/request.ts` merges both namespaces at request time
 - Adding a locale: add to `locales` array in `src/i18n/routing.ts` + create message files (see [`contributing.md`](./contributing.md) → How to add a locale for the full walkthrough)
-- `src/i18n/routing.ts` is also the single source of `generateStaticParamsForLocales()`, re-exported by every locale-aware route (home, about, privacy, cookie-policy, the `[locale]` layout). One edit to `routing.ts` flows a new locale through every page's static generation; see [implementation.md → Phase 11](./implementation.md#phase-11-pages--composition).
+- `src/i18n/routing.ts` is also the single source of `generateStaticParamsForLocales()`, re-exported by the home page and the `[locale]` layout. One edit to `routing.ts` flows a new locale through every page's static generation; see [implementation.md → Phase 11](./implementation.md#phase-11-routes).
 
 ---
 
 ## Analytics
 
 - The `useButtonTracking` hook (`src/hooks/useButtonTracking.ts`) provides analytics decoupled from any specific vendor.
-- The full event tracking architecture is defined in [ADR-0002](./adr/0002-event-tracking-system.md): typed discriminated union (`TypedEvent`), generic `track.event()` dispatch, consent-gated adapter pattern, and five hooks.
+- The full event tracking architecture is defined in [ADR-0002](./adr/0002-event-tracking-system.md): typed discriminated union (`TypedEvent`), generic `track.event()` dispatch, consent-gated adapter pattern, and the `useButtonTracking` hook.
 - Default: `console.debug` in development.
 - Per-project: call `configureTracking()` once at app startup to wire to PostHog, GA4, Segment, or any other provider.
 - Vercel Analytics + Speed Insights are documented as an optional add-on (not shipped).

@@ -50,9 +50,9 @@ import { getCspPolicy } from "@/security";
 ```
 Does this string need fresh translation per project?
 ├── Yes → It belongs in messages/custom/
-│   (headlines, nav labels, footer copy, metadata, body content)
+│   (metadata, headlines, page copy, body content)
 └── No → It belongs in messages/base/
-    (cookie consent, 404 text, error messages, legal boilerplate)
+    (404 / not-found text, error messages)
 
 Will a copywriter or client edit this string?
 ├── Yes → custom/
