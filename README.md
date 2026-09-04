@@ -83,7 +83,3 @@ pnpm install && pnpm dev
 | **SEO**       | JSON-LD (Organization, WebSite), canonical/hreflang metadata, dynamic OG image, sitemap, robots |
 | **Analytics** | Typed event system with `track.event()`, consent-gated, vendor-agnostic adapter                 |
 | **Hooks**     | `useButtonTracking`, `useScrollLock`, `useFocusTrap`                                            |
-
-## What's NOT Included (add per-project)
-
-A component library, marketing blocks, page layout/chrome, dark mode, and Storybook — the visual/design layer is intentionally left for the end-user. Also not included: contact forms, pricing tables, testimonials, blog listings, CMS integrations, analytics vendor code, custom image loaders.
