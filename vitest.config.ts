@@ -1,6 +1,7 @@
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { playwright } from "@vitest/browser-playwright";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
 import { defineConfig } from "vitest/config";
 
 const dirname =
@@ -15,6 +16,9 @@ export default defineConfig({
     },
   },
   test: {
+    // Coverage is a workspace-level setting: it is measured across all
+    // projects in a single `vitest run` and thresholds apply to that merged
+    // report.
     coverage: {
       provider: "v8",
       enabled: true,
@@ -27,6 +31,7 @@ export default defineConfig({
       include: ["src/**/*.{ts,tsx}"],
       exclude: [
         "src/**/*.d.ts",
+        "src/**/*.stories.*",
         "src/**/__mocks__/**",
         "src/app/**",
         "src/**/page.tsx",
@@ -49,6 +54,29 @@ export default defineConfig({
           globals: true,
           include: ["src/**/*.{test,spec}.{ts,tsx}"],
           setupFiles: ["./vitest.setup.ts"],
+        },
+      },
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, ".storybook"),
+          }),
+        ],
+        test: {
+          name: "storybook",
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [
+              {
+                browser: "chromium",
+              },
+            ],
+          },
         },
       },
     ],
