@@ -5,9 +5,6 @@ import { getPageMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/lib/config/site";
 import { routing, generateStaticParamsForLocales } from "@/i18n/routing";
 import { ConsentProvider } from "@/components/providers/ConsentProvider";
-import { SiteHeader } from "@/components/layout/header/SiteHeader";
-import { SiteFooter } from "@/components/layout/footer/SiteFooter";
-import { CookieBanner } from "@/components/layout/cookie-banner/CookieBanner";
 import "../globals.css";
 
 export { generateStaticParamsForLocales as generateStaticParams };
@@ -47,13 +44,10 @@ export async function generateMetadata({
 // ── Layout ────────────────────────────────────────────────────────
 
 /**
- * Locale-scoped layout — page chrome and locale-aware providers.
+ * Locale-scoped layout — locale-aware providers and page body.
  *
- * Renders the provider chain (NextIntlClientProvider → ConsentProvider),
- * SiteHeader, <main>, SiteFooter, and CookieBanner.
- *
- * Note: `ThemeProvider` lives in the root layout so it persists
- * across client-side navigations including locale switches.
+ * Renders the provider chain (NextIntlClientProvider → ConsentProvider)
+ * around the page content.
  */
 export default async function LocaleLayout({
   children,
@@ -70,10 +64,7 @@ export default async function LocaleLayout({
       timeZone={SITE_CONFIG.timezone}
     >
       <ConsentProvider>
-        <SiteHeader />
         <main>{children}</main>
-        <SiteFooter />
-        <CookieBanner />
       </ConsentProvider>
     </NextIntlClientProvider>
   );

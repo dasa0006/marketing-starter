@@ -14,9 +14,10 @@ import { routing } from "./routing";
  *
  * The merge is a shallow spread (`{...base, ...custom}`) — top-level keys
  * from `custom` fully replace matching keys from `base`. This is intentional:
- * the two layers have disjoint top-level namespaces (base owns CookieBanner,
- * NotFound, Error, Legal; custom owns SiteHeader, SiteFooter, page content,
- * metadata), so a shallow merge is the correct semantics.
+ * the two layers have disjoint top-level namespaces (base owns template
+ * infrastructure strings such as not-found and error; custom owns per-project
+ * content such as metadata and page copy), so a shallow merge is the correct
+ * semantics.
  *
  * Dynamic `import()` works correctly here because this function runs in the
  * server module graph — no bundler limitations on computed dynamic imports

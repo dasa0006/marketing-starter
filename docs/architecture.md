@@ -7,35 +7,25 @@ For the phased build plan explaining _why_ things are structured this way, see [
 ## Provider Hierarchy
 
 ```
-<html class="h-full" lang={locale} suppressHydrationWarning>
-  <body className={`${fontVariables} antialiased`}>
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
+<html lang="en">
+  <body>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages}
+      timeZone={SITE_CONFIG.timezone}
     >
-      <NextIntlClientProvider
-        locale={locale}
-        messages={messages}
-        timeZone={SITE_CONFIG.timezone}
-      >
-        <ConsentProvider>
-          <SiteHeader />
-          <main>{children}</main>
-          <SiteFooter />
-          <CookieBanner />  ← renders conditionally based on consent status
-        </ConsentProvider>
-      </NextIntlClientProvider>
-    </ThemeProvider>
+      <ConsentProvider>
+        <main>{children}</main>
+      </ConsentProvider>
+    </NextIntlClientProvider>
   </body>
 </html>
 ```
 
 **Order rationale:**
 
-- `ThemeProvider` outermost — prevents dark mode flicker on page load
 - `NextIntlClientProvider` — provides i18n messages to everything below, including the consent system
-- `ConsentProvider` — manages cookie consent state; the CookieBanner reads from this context
+- `ConsentProvider` — manages cookie consent state; consumer components read from this context
 
 ---
 
@@ -90,7 +80,7 @@ The cookie name is `consent-status`, stored as the constant `CONSENT_COOKIE_NAME
 
 ### Reactive state
 
-`ConsentProvider` is the sole source of reactive consent state for the component tree. There is no standalone reactive consent module. The provider wraps the storage seam in React context and exposes `status`, `accept()`, `decline()`, and `reset()` to children (e.g., `CookieBanner`).
+`ConsentProvider` is the sole source of reactive consent state for the component tree. There is no standalone reactive consent module. The provider wraps the storage seam in React context and exposes `status`, `accept()`, `decline()`, and `reset()` to children (e.g., a cookie banner component the project adds).
 
 When the user acts, `ConsentProvider` calls `storage.setConsent()` and updates its internal React state — one action, one state machine. The event dispatch layer (see ADR-0002) reads consent synchronously from the storage seam on every event dispatch, eliminating a second module and the bridging logic that would be needed to keep two modules in sync.
 

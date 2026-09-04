@@ -1,6 +1,6 @@
 # Marketing Starter
 
-A production-ready Next.js template for client marketing websites. Clone it, configure your brand, compose pages from blocks, and ship. Zero boilerplate setup.
+A production-ready Next.js template for client marketing websites. Clone it, configure your brand, build your own UI, and ship. Zero boilerplate setup for the parts every marketing site needs.
 
 ## Reading Guide
 
@@ -22,8 +22,8 @@ This project ships with several documentation files. Which one you need depends 
 This template exists to eliminate the 1–2 days of boilerplate required to start a new marketing website. Every decision in this project serves three goals:
 
 1. **Consistency over cleverness.** Conventions are strict and enforced by config (ESLint, Husky, TypeScript strict). There should be one obvious way to do something, not three.
-2. **AI-friendly by design.** The manifest + context files, explicit file conventions, and data-driven page composition mean an AI can understand the project in one read — without re-deriving architecture from scratch each time.
-3. **Patterns over projects.** Components ship in the template only if they solve a pattern seen across 2+ client projects. Everything else is left for the end-user to build in their own project instance.
+2. **AI-friendly by design.** The manifest + context files, explicit file conventions, and a small, well-documented surface mean an AI can understand the project in one read — without re-deriving architecture from scratch each time.
+3. **Scaffold over opinions.** The template ships the cross-cutting infrastructure every marketing site needs (i18n, consent, security, SEO, analytics plumbing) and leaves the visual layer — components, blocks, layout, and theme — for the end-user to build in their own project instance.
 
 ### What this template is for
 
@@ -35,27 +35,29 @@ Marketing websites for clients. No heavy backend, no e-commerce, no authenticati
 - Premature abstraction (generating features before seeing the pattern twice)
 - Framework coupling beyond Next.js + React (no CMS, no analytics provider by default)
 - Barrel exports and index.js files (imports are explicit so tools can trace dependencies)
+- A shipped component library or design system — the visual layer is left to the project
 
 ## Stack
 
-| Layer           | Choice                                                       |
-| --------------- | ------------------------------------------------------------ |
-| Framework       | Next.js 16 (App Router, Turbopack)                           |
-| Language        | TypeScript strict                                            |
-| Styling         | Tailwind CSS v4                                              |
-| i18n            | next-intl (en + da, as-needed prefix)                        |
-| Dark mode       | next-themes (system + user toggle)                           |
-| Testing         | Vitest (unit) + Playwright (E2E) + Storybook (visual + a11y) |
-| Package manager | pnpm                                                         |
-| Git hooks       | Husky + commitlint (conventional commits)                    |
+| Layer           | Choice                                                              |
+| --------------- | ------------------------------------------------------------------- |
+| Framework       | Next.js 16 (App Router, Turbopack)                                  |
+| Language        | TypeScript strict                                                   |
+| Styling         | Tailwind CSS v4                                                     |
+| i18n            | next-intl (en + da, as-needed prefix)                               |
+| Consent         | Cookie-consent provider with storage seam                           |
+| Security        | CSP + security headers via `next.config.ts`                         |
+| SEO             | JSON-LD, canonical/hreflang metadata, sitemap, robots.txt, OG image |
+| Testing         | Vitest (unit + coverage) + Playwright (E2E)                         |
+| Package manager | pnpm                                                                |
+| Git hooks       | Husky + commitlint (conventional commits)                           |
 
 ## TL;DR Conventions
 
 - All source in `src/`
-- Components split into: `ui/` (primitives) → `blocks/` (patterns) → `layout/` (chrome) → `pages/` (assemblies)
-- No `project-components/` directory — new components always go in `ui/`, `blocks/`, `layout/`, or `pages/`
-- Pages compose blocks directly: each block is wrapped in a `Section` that owns its surface, size, and full-bleed behaviour
-- Components follow tier-based file conventions: Tier 0 (flat file, no story), Tier 1 (story + mock), Tier 2 (+ unit test)
+- No barrel exports — imports are explicit so tools can trace dependencies
+- Server/Client component boundaries marked with `"use client"` only where needed
+- Per-project brand config lives in `src/lib/config/site.ts` (override seam — see `CONTEXT.md`)
 
 ## Quick-Start
 
@@ -73,15 +75,15 @@ pnpm install && pnpm dev
 
 ## What's Included?
 
-| Category   | Components                                                                             |
-| ---------- | -------------------------------------------------------------------------------------- |
-| **UI**     | Button, LinkButton, Heading, Text, Image, Brand, LocaleSwitcher, ToggleMode            |
-| **Blocks** | Hero, FeatureGrid, CTA, TextBlock                                                      |
-| **Layout** | SiteHeader, SiteFooter, Section, MobileDrawer, CookieBanner                            |
-| **Pages**  | Index (home), About, Privacy Policy, Cookie Policy                                     |
-| **Hooks**  | useButtonTracking, useScrollLock, useFocusTrap                                         |
-| **SEO**    | JSON-LD (Organization, WebSite, BreadcrumbList), dynamic OG image, sitemap, robots.txt |
+| Category      | What ships                                                                                      |
+| ------------- | ----------------------------------------------------------------------------------------------- |
+| **i18n**      | next-intl with `en` + `da`, `as-needed` URL prefix, base/custom message split                   |
+| **Consent**   | Cookie-consent provider with an injectable storage seam + event-gating                          |
+| **Security**  | CSP (dev vs prod), `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, HSTS         |
+| **SEO**       | JSON-LD (Organization, WebSite), canonical/hreflang metadata, dynamic OG image, sitemap, robots |
+| **Analytics** | Typed event system with `track.event()`, consent-gated, vendor-agnostic adapter                 |
+| **Hooks**     | `useButtonTracking`, `useScrollLock`, `useFocusTrap`                                            |
 
 ## What's NOT Included (add per-project)
 
-Contact forms, pricing tables, testimonials, blog listings, CMS integrations, analytics vendor code, custom image loaders.
+A component library, marketing blocks, page layout/chrome, dark mode, and Storybook — the visual/design layer is intentionally left for the end-user. Also not included: contact forms, pricing tables, testimonials, blog listings, CMS integrations, analytics vendor code, custom image loaders.

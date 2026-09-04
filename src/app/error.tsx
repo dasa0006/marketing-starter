@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button/Button";
 
 /**
  * Root-level error boundary (outside locale context).
@@ -24,10 +23,16 @@ export default function RootError({
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4 text-center">
       <h1 className="text-4xl font-bold">Something went wrong</h1>
-      <p className="text-muted-foreground max-w-md">
+      <p className="max-w-md text-slate-500">
         An unexpected error occurred. Please try again.
       </p>
-      <Button onClick={() => unstable_retry()}>Try again</Button>
+      <button
+        type="button"
+        onClick={() => unstable_retry()}
+        className="rounded-md bg-slate-900 px-4 py-2 text-white transition-opacity hover:opacity-90"
+      >
+        Try again
+      </button>
     </div>
   );
 }

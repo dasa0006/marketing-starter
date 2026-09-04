@@ -1,4 +1,3 @@
-import Index from "@/components/pages/Index";
 import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
 import { getPageMetadata } from "@/lib/seo/metadata";
 import { routing, generateStaticParamsForLocales } from "@/i18n/routing";
@@ -25,10 +24,5 @@ export async function generateMetadata({
 }
 
 export default function HomePage() {
-  return (
-    <>
-      <Index />
-      <JsonLdScripts />
-    </>
-  );
+  return <JsonLdScripts />;
 }

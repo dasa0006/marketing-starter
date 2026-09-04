@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button/Button";
 
 /**
  * Locale-scoped error boundary.
@@ -30,8 +29,14 @@ export default function LocaleError({
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-4 text-center">
       <h1 className="text-4xl font-bold">{t("title")}</h1>
-      <p className="text-muted-foreground max-w-md">{t("description")}</p>
-      <Button onClick={() => unstable_retry()}>{t("retry")}</Button>
+      <p className="max-w-md text-slate-500">{t("description")}</p>
+      <button
+        type="button"
+        onClick={() => unstable_retry()}
+        className="rounded-md bg-slate-900 px-4 py-2 text-white transition-opacity hover:opacity-90"
+      >
+        {t("retry")}
+      </button>
     </div>
   );
 }
