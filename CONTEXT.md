@@ -1,6 +1,6 @@
 # Marketing Starter
 
-This is a production-grade Next.js marketing site template with a composable architecture of Primitives, Blocks, Layouts, and Surfaces. It ships with pre-translated base messages and an immutable core (Template Instance), while allowing per-project additions (Project Instance) to sit cleanly alongside it.
+This is a production-grade Next.js marketing site template with a composable architecture of Primitives, Blocks, Layouts, and Surfaces. It ships with pre-translated base messages and a core (Template Instance), while allowing per-project additions (Project Instance) to sit cleanly alongside it.
 
 ## Language
 
@@ -25,19 +25,19 @@ A narrow wrapper around Blocks providing background Surface and vertical spacing
 _Avoid_: Block, Page Section
 
 **Template Instance**:
-Code, config, messages, and assets that ship with the starter and form the template's immutable core. Template component code must never be modified per-project. However, certain files shipped with the template are designated as **override seams** — configuration files, token files, and message files that are explicitly documented as per-project configuration (e.g., `src/lib/config/site.ts`, `src/app/globals.css` token overrides, `messages/custom/`). These are part of the template's API surface, not its implementation internals, and are intended to be edited per-project. All other template code is immutable.
+Code, config, messages, and assets that ship with the starter. Certain shipped files are designated as **override seams** — the documented per-project configuration surface (e.g., `src/lib/config/site.ts`, `src/app/globals.css` token overrides, `messages/custom/`), intended to be edited per project.
 
 **Project Instance**:
 Code, config, messages, and assets that are added or changed per-project. Client-specific additions that sit alongside the Template Instance.
 
 **Override Seam**:
-A Template Instance file that is explicitly documented as per-project configuration and intended to be modified per-project. Override seams are part of the template's API surface, not its implementation internals. Examples include `src/lib/config/site.ts`, `src/app/globals.css` token overrides, and files within `messages/custom/`. All other template code remains immutable.
+A Template Instance file that is explicitly documented as the per-project configuration surface — the place the end-user edits to configure and brand their site. Examples include `src/lib/config/site.ts`, `src/app/globals.css` token overrides, and files within `messages/custom/`.
 
 **Template-Component**:
-A component that belongs to the Template Instance. Ships with the starter because it solves a repeating pattern across projects.
+A component that belongs to the Template Instance. Ships with the starter because it solves a repeating pattern across projects. A shipping distinction, not an implementation category — there is no `template-components/` directory; Template Components live in `ui/`, `blocks/`, `layout/`, and `pages/` like any other component.
 
 **Project-Component**:
-A component that belongs to the Project Instance. Client-specific additions that sit alongside Template Components.
+A component that belongs to the Project Instance — something the end-user implements themselves. A shipping distinction, not an implementation category. There is no `project-components/` directory, and in a Project Instance the prefix carries no information: everything the end-user writes is a Project Component. Components are organized solely by `ui/`, `blocks/`, `layout/`, and `pages/`.
 
 **Base Message**:
 A translation string whose translation cost is borne by the template author. Base Messages are pre-translated for all shipped locales before the project receives them, and are never extracted for re-translation per project.
@@ -48,4 +48,4 @@ A translation string whose translation cost is borne by the project. Custom Mess
 _Avoid_: Project Message
 
 **Component CSS**:
-A CSS file co-located in the same directory as its component's TSX file, present only when the component defines `@layer components` classes (variants, sizes, states). Not every component has a Component CSS file — components built purely from Tailwind utility classes do not. Component CSS files use PascalCase filenames matching their component (e.g., `Section.tsx` → `Section.css`). All Component CSS files are imported explicitly by `globals.css`. This applies uniformly to Template-Components and Project-Components across all architectural categories (ui, blocks, layout, pages).
+A CSS file co-located in the same directory as its component's TSX file, present only when the component defines `@layer components` classes (variants, sizes, states). Not every component has a Component CSS file — components built purely from Tailwind utility classes do not. Component CSS files use PascalCase filenames matching their component (e.g., `Section.tsx` → `Section.css`). All Component CSS files are imported explicitly by `globals.css`. This applies uniformly to all components across all architectural categories (ui, blocks, layout, pages).

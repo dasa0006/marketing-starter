@@ -325,7 +325,7 @@ The checklist is self-certified. CI enforces the tooling checks; the checklist r
 - **Minimum approvals:** 1
 - **Required reviewers:** At least one team member other than the author
 - **Scope of review:**
-  - Architectural fit (does this belong in template or project-components?)
+  - Architectural fit (does this belong in the template, or is it client-specific work?)
   - Naming and file structure (does it match conventions?)
   - Edge cases and error states
   - Test coverage (are the right tests present?)
