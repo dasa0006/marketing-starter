@@ -21,3 +21,12 @@ updates:
     labels:
       - "dependencies"
     versioning-strategy: "increase"
+    # `playwright` and `@playwright/test` are released in lockstep and must
+    # stay on the same version — bundling them prevents the "two different
+    # versions of @playwright/test" failure a split bump causes.
+    groups:
+      playwright:
+        patterns:
+          - "playwright"
+          - "playwright-core"
+          - "@playwright/test"
