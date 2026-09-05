@@ -158,13 +158,16 @@ A production build catches:
 
 This is the single most valuable pre-push gate. If the build breaks, the push is rejected.
 
-### Gate: Unit tests
+### Gate: Vitest (unit + storybook)
 
-| Tool         | Scope                | Action             |
-| ------------ | -------------------- | ------------------ |
-| `vitest run` | `**/*.test.{ts,tsx}` | Run all unit tests |
+`pnpm test:run` runs both Vitest projects declared in `vitest.config.ts`:
 
-Unit tests are fast enough (~10-30s) that running them pre-push is practical. This catches logic regressions before they reach shared branches.
+| Project     | Environment                      | Scope                                           | Browser required?                                         |
+| ----------- | -------------------------------- | ----------------------------------------------- | --------------------------------------------------------- |
+| `unit`      | jsdom                            | `src/**/*.{test,spec}.{ts,tsx}`                 | No                                                        |
+| `storybook` | browser mode (headless Chromium) | Storybook stories via `@storybook/addon-vitest` | Yes — `pnpm exec playwright install --with-deps chromium` |
+
+The `storybook` project launches a real headless Chromium through `@vitest/browser-playwright`, so the Playwright Chromium binary must be installed before the first run. Unit tests are fast enough (~10-30s) that running them pre-push is practical; the browser project adds a little overhead but catches component regressions that jsdom cannot.
 
 ### Failure mode
 
@@ -186,20 +189,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       1. Checkout
-      2. Install pnpm
-      3. pnpm install --frozen-lockfile
-      4. pnpm lint
-      5. pnpm typecheck
+      2. Setup pnpm + Node.js (pnpm/setup)
+      3. pnpm lint
+      4. pnpm typecheck
+      5. Cache + install Chromium (Vitest storybook browser-mode tests)
       6. pnpm test:run -- --coverage
       7. pnpm build
 ```
 
-| Step      | Tool                      | Fails on                                                             | Notes                                                                                  |
-| --------- | ------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Lint      | `eslint --max-warnings=0` | Any ESLint error; warnings treated as errors with `--max-warnings=0` | Full project (not just staged)                                                         |
-| Typecheck | `tsc --noEmit`            | Any type error                                                       | Redundant with pre-commit but enforced for CI-only contributors (e.g., PRs from forks) |
-| Test      | `vitest run --coverage`   | Any test failure OR coverage below threshold                         | Coverage threshold configurable in `vitest.config.ts`                                  |
-| Build     | `next build`              | Any build error or warning                                           | Blocking — non-negotiable                                                              |
+| Step      | Tool                      | Fails on                                                             | Notes                                                                                                              |
+| --------- | ------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Lint      | `eslint --max-warnings=0` | Any ESLint error; warnings treated as errors with `--max-warnings=0` | Full project (not just staged)                                                                                     |
+| Typecheck | `tsc --noEmit`            | Any type error                                                       | Redundant with pre-commit but enforced for CI-only contributors (e.g., PRs from forks)                             |
+| Test      | `vitest run --coverage`   | Any test failure OR coverage below threshold                         | Runs two projects: `unit` (jsdom) + `storybook` (headless Chromium). The browser project needs Chromium installed. |
+| Build     | `next build`              | Any build error or warning                                           | Blocking — non-negotiable                                                                                          |
 
 ### Pipeline: `.github/workflows/playwright.yml`
 

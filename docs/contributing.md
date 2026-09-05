@@ -76,7 +76,7 @@ Any "yes" to the first branch of any question gives the answer. Base strings are
 | Providers (`ConsentProvider`)                                | Vitest unit test with injected fake storage |
 | Routes (home, 404, error boundaries)                         | Playwright E2E smoke test                   |
 
-Unit tests run in the jsdom environment with `@testing-library/react` and `@testing-library/user-event`. Coverage thresholds are enforced by `pnpm test:run` (see [`quality-gates.md`](./quality-gates.md)).
+`pnpm test:run` runs two Vitest projects defined in `vitest.config.ts`: `unit` (jsdom, with `@testing-library/react` and `@testing-library/user-event`) and `storybook` (browser mode — a real headless Chromium via `@vitest/browser-playwright`, driven by `@storybook/addon-vitest`). The `storybook` project requires the Playwright Chromium binary (`pnpm exec playwright install --with-deps chromium`). Coverage thresholds are enforced across the merged report of both projects (see [`quality-gates.md`](./quality-gates.md)).
 
 ---
 

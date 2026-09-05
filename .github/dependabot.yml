@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # GitHub Actions — keep workflow actions on current majors so runtime
+  # deprecations (e.g. Node 20) are picked up automatically.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "tooling"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+
+  # npm/pnpm — bump JS dependencies (uses pnpm via the lockfile).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    versioning-strategy: "increase"
